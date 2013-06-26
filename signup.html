@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="cmn">
+  <head>
+    <!-- meta -->
+    <meta charset="utf-8" />
+    <title>新用户注册 - 江南听雨用户体验设计稿</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="开发者的试验场，大量阿卡林出没，不过只有好孩子才能看见" />
+    <meta name="author" content="JNRain" />
+
+    <!-- styles -->
+    <link rel="stylesheet" href="http://static.jnrain.com/common/css/reset.css" />
+
+    <style>
+      body {
+        color: #1f1f1f;
+        background-color: #f8fcf3;
+      }
+
+      article {
+        width: 80%;
+        margin: 2em auto;
+
+        font-family: "Junction", "WenQuanYi Micro Hei Light", "WenQuanYi Micro Hei", "Microsoft YaHei", sans-serif;
+        font-size: 16px;
+        font-weight: 100;
+      }
+
+      h1 {
+        font-size: 32px;
+        color: #669a1f;
+      }
+
+      article>header {
+        margin: 0 0 1em;
+      }
+
+      hr {
+        display: block;
+        clear: both;
+        width: 100%;
+        margin: 0.5em auto;
+        border: none;
+        border-bottom: 1px solid rgba(169, 212, 109, 0.4);
+      }
+
+      form {
+        font-size: 20px;
+      }
+
+      input,
+      select {
+        font-size: 20px;
+      }
+
+      label {
+        font-size: 90%;
+        color: #669a1f;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="password"] {
+        display: block;
+        clear: both;
+        width: 80%;
+
+        margin: 0 0 1em;
+        padding: 4px 4px 2px 6px;
+        border: none;
+        background: transparent;
+        box-shadow: 0 0 6px rgba(169, 212, 109, 0.75);
+        border-radius: 12px;
+      }
+
+      select {
+        clear: both;
+        width: 80%;
+        margin: 0 0 1em;
+      }
+
+      fieldset {
+        margin: 0 0 1em;
+        width: 50%;
+        float: left;
+      }
+
+      input[type="text"]:last-child,
+      input[type="email"]:last-child,
+      input[type="password"]:last-child,
+      select:last-child,
+      fieldset:last-child,
+      fieldset>dl:last-child {
+        margin: 0;
+      }
+
+      fieldset>legend {
+        display: list-item;
+        margin: 0 0 0.75em;
+        font-weight: bold;
+        list-style: outside square;
+        color: #669a1f;
+        border-bottom: 1px solid #669a1f;
+      }
+
+      .sub-fieldset {
+        width: 100%;
+      }
+
+      .sub-fieldset>legend {
+        display: block;
+        list-style: none;
+        font-size: 90%;
+        font-weight: inherit;
+      }
+
+      fieldset>dl {
+        display: inline-block;
+        margin: 0 0 1em;
+      }
+
+      fieldset>dl>dt {
+        display: inline-block;
+        margin-left: 2em;
+      }
+
+      fieldset>dl>dt:first-child {
+        margin-left: 0;
+      }
+
+      fieldset>dl>dd {
+        display: inline-block;
+      }
+
+      input[type="text"].ng-invalid.ng-dirty,
+      input[type="email"].ng-invalid.ng-dirty,
+      input[type="password"].ng-invalid.ng-dirty {
+        background-color: rgba(255, 0, 0, 0.1);
+        box-shadow: 0 0 6px rgba(255, 0, 0, 0.1);
+      }
+
+      input[type="text"].ng-valid.ng-dirty,
+      input[type="email"].ng-valid.ng-dirty,
+      input[type="password"].ng-valid.ng-dirty {
+        background: rgba(0, 255, 0, 0.1);
+      }
+    </style>
+
+    <!-- framework js -->
+    <script src="//static.jnrain.com/common/js/require.js"></script>
+    <script src="/js/signup.js"></script>
+
+    <!-- [if lt IE 9]
+      just ignore them for the moment
+    [endif] -->
+  </head>
+
+  <body>
+    <article ng-app="jnrain2-reg">
+    <header>
+    <h1>注册一个新帐号</h1>
+    <p>TODO: Responsive 布局；验证逻辑；继续调样式；请最终用户体验并指出坑之所在</p>
+    </header>
+
+      <form id="signupform"
+        novalidate="novalidate"
+        name="signupForm"
+        ng-controller="SignupForm"
+        >
+        <fieldset>
+          <legend>基本登陆信息</legend>
+          <input id="email" type="email" name="email" required="required"
+          placeholder="邮箱地址"
+          ng-model="email"
+          data-validation-minlength="6"
+          data-error-message="请输入有效的电子邮件地址。"
+          />
+          <input id="psw1" type="password" name="psw1" required="required"
+          placeholder="密码"
+          ng-model="psw1"
+          ng-minlength="8"
+          data-minlength-message="密码最短 8 个字符。"
+          data-required-message="请设置一个密码。"
+          />
+          <input id="psw2" type="password" name="psw2"
+          placeholder="密码（重复一遍）"
+          ng-model="psw2"
+          data-equalto="#psw1"
+          data-equalto-message="两次输入的密码不一致。"
+          />
+        </fieldset>
+
+        <fieldset>
+          <legend>选填信息</legend>
+          <input id="alias" type="text" name="alias"
+          placeholder="个性 ID （选择后不能更改）"
+          ng-model="alias"
+          ng-pattern="/^[A-Za-z][0-9A-Za-z]+$/"
+          ng-minlength="2"
+          ng-maxlength="12"
+          data-minlength-message="用户 ID 最短 2 个字符。"
+          data-maxlength-message="用户 ID 最长 12 个字符。"
+          data-regexp-message="用户 ID 只能包含字母和数字，且第一个字符必须是字母。"
+          />
+          <input id="birthday" type="text" name="birthday"
+          placeholder="出生日期，格式如 2012-02-17"
+          ng-model="birthday"
+          />
+        </fieldset>
+
+        <hr />
+
+        <fieldset>
+          <legend>实名认证信息</legend>
+          <input id="person-realname" type="text" name="person_realname" required="required"
+          placeholder="真实姓名"
+          ng-model="personRealname"
+          />
+          <input id="person-phone" type="text" name="person_phone" required="required"
+          placeholder="联系电话"
+          ng-model="personPhone"
+          ng-pattern="/^[0-9]{7,11}$/"
+          />
+
+          <label id="label-person-role" for="person_role">你的身份</label>
+          <dl id="person-role">
+            <dt><input id="person-role-student" type="radio" name="person_role" value="student" ng-model="personRole" /></dt><dd>学生</dd>
+            <dt><input id="person-role-staff" type="radio" name="person_role" value="staff" ng-model="personRole" /></dt><dd>教职工</dd>
+          </dl>
+        </fieldset>
+
+        <fieldset>
+          <legend>实名认证信息 &mdash; 续</legend>
+          <div ng-switch="personRole">
+            <section ng-switch-when="student">
+              <input id="person-stud-number" type="text" name="person_stud_number"
+              placeholder="学号"
+              ng-model="personStudNumber"
+              ng-pattern="/^[0-9]{10}$/"
+              ng-required="personRole == 'student'"
+              />
+
+              <fieldset class="sub-fieldset">
+                <legend>就读班级信息</legend>
+                <select id="person-stud-school" name="person_stud_school"
+                  ng-model="personStudSchool"
+                  ng-required="personRole == 'student'"
+                  >
+                  <option value="">学院</option>
+                </select>
+                <select id="person-stud-dept" name="person_stud_dept"
+                  ng-model="personStudDept"
+                  ng-required="personRole == 'student'"
+                  >
+                  <option value="">专业</option>
+                </select>
+                <select id="person-stud-class" name="person_stud_class"
+                  ng-model="personStudClass"
+                  ng-required="personRole == 'student'"
+                  >
+                  <option value="">班级</option>
+                </select>
+              </fieldset>
+
+              <fieldset class="sub-fieldset">
+                <legend>通讯地址信息</legend>
+                <select id="person-stud-dorm-complex" name="person_stud_dorm_complex"
+                  ng-model="personStudDormComplex"
+                  ng-required="personRole == 'student'"
+                  >
+                  <option value="">寝室园区</option>
+                </select>
+                <select id="person-stud-dorm-bldg" name="person_stud_dorm_bldg"
+                  ng-model="personStudDormBldg"
+                  ng-required="personRole == 'student'"
+                  >
+                  <option value="">楼号</option>
+                </select>
+                <input id="person-stud-dorm-room" type="text" name="person_stud_dorm_room"
+                placeholder="寝室号"
+                ng-model="personStudDormRoom"
+                ng-required="personRole == 'student'"
+                />
+              </fieldset>
+            </section>
+
+            <section ng-switch-when="staff">
+              <input id="person-staff-number" type="text" name="person_staff_number"
+              placeholder="工号"
+              ng-model="personStaffNumber"
+              ng-required="personRole == 'staff'"
+              />
+              <select id="person-staff-dept" name="person_staff_dept"
+                ng-model="personStaffDept"
+                ng-required="personRole == 'staff'"
+                >
+                <option value="">工作部门</option>
+              </select>
+            </section>
+
+            <section ng-switch-default="ng-switch-default">
+              选择你的身份来展开相应项目。
+            </section>
+          </div>
+        </fieldset>
+
+        <hr />
+
+        <fieldset>
+          <legend>完成</legend>
+          <input id="submit" type="submit" name="submit" value="提交注册" />
+        </fieldset>
+      </form>
+    </article>
+  </body>
+<!-- vim:set ai et ts=2 sw=2 sts=2 fenc=utf-8: -->
+</html>
