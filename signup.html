@@ -35,21 +35,13 @@
         margin: 0 0 1em;
       }
 
-      hr {
-        display: block;
-        clear: both;
-        width: 100%;
-        margin: 0.5em auto;
-        border: none;
-        border-bottom: 1px solid rgba(169, 212, 109, 0.4);
-      }
-
       form {
         font-size: 20px;
       }
 
       input,
       select {
+        font-family: "Junction", "WenQuanYi Micro Hei Light", "WenQuanYi Micro Hei", "Microsoft YaHei", sans-serif;
         font-size: 20px;
       }
 
@@ -63,7 +55,7 @@
       input[type="password"] {
         display: block;
         clear: both;
-        width: 80%;
+        width: 100%;
 
         margin: 0 0 1em;
         padding: 4px 4px 2px 6px;
@@ -79,28 +71,39 @@
         margin: 0 0 1em;
       }
 
-      fieldset {
+      form>section {
+        position: relative;
         margin: 0 0 1em;
+        border-bottom: 1px solid rgba(169, 212, 109, 0.4);
+      }
+
+      form>section>fieldset {
+        margin: 0 0 0 25%;
+        padding: 0 0 1em;
         width: 50%;
-        float: left;
       }
 
       input[type="text"]:last-child,
       input[type="email"]:last-child,
       input[type="password"]:last-child,
       select:last-child,
-      fieldset:last-child,
-      fieldset>dl:last-child {
-        margin: 0;
+      form>section:last-child,
+      fieldset>dl:last-child,
+      fieldset>code:last-child {
+        margin-bottom: 0;
       }
 
-      fieldset>legend {
-        display: list-item;
-        margin: 0 0 0.75em;
+      form>section:last-child {
+        border-bottom: none;
+      }
+
+      form>section>fieldset>legend {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 25%;
         font-weight: bold;
-        list-style: outside square;
         color: #669a1f;
-        border-bottom: 1px solid #669a1f;
       }
 
       .sub-fieldset {
@@ -109,9 +112,11 @@
 
       .sub-fieldset>legend {
         display: block;
-        list-style: none;
+        margin: 0 0 0.75em;
         font-size: 90%;
         font-weight: inherit;
+        border-bottom: 1px solid #669a1f;
+        color: #669a1f;
       }
 
       fieldset>dl {
@@ -121,7 +126,7 @@
 
       fieldset>dl>dt {
         display: inline-block;
-        margin-left: 2em;
+        margin-left: 1em;
       }
 
       fieldset>dl>dt:first-child {
@@ -144,11 +149,23 @@
       input[type="password"].ng-valid.ng-dirty {
         background: rgba(0, 255, 0, 0.1);
       }
+
+      .debugcode {
+        display: block;
+        margin: 0 0 2em;
+        opacity: 0.75;
+        font-family: "Source Code Pro", monospace;
+        font-size: 50%;
+        font-weight: 100;
+      }
+
+      input + .debugcode {
+        margin: -1em 0 1em;
+      }
     </style>
 
     <!-- framework js -->
     <script src="//static.jnrain.com/common/js/require.js"></script>
-    <script src="/js/signup.js"></script>
 
     <!-- [if lt IE 9]
       just ignore them for the moment
@@ -156,7 +173,7 @@
   </head>
 
   <body>
-    <article ng-app="jnrain2-reg">
+    <article id="app-jnrain2-reg">
     <header>
     <h1>注册一个新帐号</h1>
     <p>TODO: Responsive 布局；验证逻辑；继续调样式；请最终用户体验并指出坑之所在</p>
@@ -167,151 +184,256 @@
         name="signupForm"
         ng-controller="SignupForm"
         >
-        <fieldset>
-          <legend>基本登陆信息</legend>
-          <input id="email" type="email" name="email" required="required"
-          placeholder="邮箱地址"
-          ng-model="email"
-          data-validation-minlength="6"
-          data-error-message="请输入有效的电子邮件地址。"
-          />
-          <input id="psw1" type="password" name="psw1" required="required"
-          placeholder="密码"
-          ng-model="psw1"
-          ng-minlength="8"
-          data-minlength-message="密码最短 8 个字符。"
-          data-required-message="请设置一个密码。"
-          />
-          <input id="psw2" type="password" name="psw2"
-          placeholder="密码（重复一遍）"
-          ng-model="psw2"
-          data-equalto="#psw1"
-          data-equalto-message="两次输入的密码不一致。"
-          />
-        </fieldset>
+        <input id="debug" type="checkbox" name="debug"
+        ng-model="debug" />
+        <label id="label-debug" for="debug">调试表单</label>
+        <code class="debugcode" ng-show="debug">
+          signupForm = {{signupForm}}<br />
+          signupForm.$valid = {{signupForm.$valid}}<br />
+          signupForm.$error = {{signupForm.$error}}
+        </code>
 
-        <fieldset>
-          <legend>选填信息</legend>
-          <input id="alias" type="text" name="alias"
-          placeholder="个性 ID （选择后不能更改）"
-          ng-model="alias"
-          ng-pattern="/^[A-Za-z][0-9A-Za-z]+$/"
-          ng-minlength="2"
-          ng-maxlength="12"
-          data-minlength-message="用户 ID 最短 2 个字符。"
-          data-maxlength-message="用户 ID 最长 12 个字符。"
-          data-regexp-message="用户 ID 只能包含字母和数字，且第一个字符必须是字母。"
-          />
-          <input id="birthday" type="text" name="birthday"
-          placeholder="出生日期，格式如 2012-02-17"
-          ng-model="birthday"
-          />
-        </fieldset>
+        <section>
+          <fieldset>
+            <legend>基本登陆信息</legend>
+            <input id="email" type="email" name="email" required="required"
+            placeholder="邮箱地址"
+            ng-model="email"
+            data-validation-minlength="6"
+            data-error-message="请输入有效的电子邮件地址。"
+            />
+            <code class="debugcode" ng-show="debug">
+              email = {{email}}<br />
+              signupForm.email.$error = {{signupForm.email.$error}}
+            </code>
+            <input id="psw1" type="password" name="psw1" required="required"
+            placeholder="密码"
+            ng-model="psw1"
+            ng-minlength="8"
+            data-minlength-message="密码最短 8 个字符。"
+            data-required-message="请设置一个密码。"
+            />
+            <code class="debugcode" ng-show="debug">
+              psw1 = {{psw1}}<br />
+              signupForm.psw1.$error = {{signupForm.psw1.$error}}
+            </code>
+            <input id="psw2" type="password" name="psw2"
+            placeholder="重复密码"
+            ng-model="psw2"
+            data-equalto="#psw1"
+            data-equalto-message="两次输入的密码不一致。"
+            />
+            <code class="debugcode" ng-show="debug">
+              psw2 = {{psw2}}<br />
+              signupForm.psw2.$error = {{signupForm.psw2.$error}}
+            </code>
+            <input id="nick" type="text" name="nick" required="required"
+            placeholder="昵称"
+            ng-model="nick"
+            ng-maxlength="32"
+            />
+            <code class="debugcode" ng-show="debug">
+              nick = {{nick}}<br />
+              signupForm.nick.$error = {{signupForm.nick.$error}}
+            </code>
+          </fieldset>
+        </section>
 
-        <hr />
+        <section>
+          <fieldset>
+            <legend>选填信息</legend>
+            <input id="alias" type="text" name="alias"
+            placeholder="个性 ID （选择后不能更改）"
+            ng-model="alias"
+            ng-pattern="/^[A-Za-z][0-9A-Za-z]+$/"
+            ng-minlength="2"
+            ng-maxlength="12"
+            data-minlength-message="用户 ID 最短 2 个字符。"
+            data-maxlength-message="用户 ID 最长 12 个字符。"
+            data-regexp-message="用户 ID 只能包含字母和数字，且第一个字符必须是字母。"
+            />
+            <code class="debugcode" ng-show="debug">
+              alias = {{alias}}<br />
+              signupForm.alias.$error = {{signupForm.alias.$error}}
+            </code>
+            <input id="birthday" type="text" name="birthday"
+            placeholder="出生日期，格式如 2012-02-17"
+            ng-model="birthday"
+            ng-pattern="/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/"
+            />
+            <code class="debugcode" ng-show="debug">
+              birthday = {{birthday}}<br />
+              signupForm.birthday.$error = {{signupForm.birthday.$error}}
+            </code>
+          </fieldset>
+        </section>
 
-        <fieldset>
-          <legend>实名认证信息</legend>
-          <input id="person-realname" type="text" name="person_realname" required="required"
-          placeholder="真实姓名"
-          ng-model="personRealname"
-          />
-          <input id="person-phone" type="text" name="person_phone" required="required"
-          placeholder="联系电话"
-          ng-model="personPhone"
-          ng-pattern="/^[0-9]{7,11}$/"
-          />
+        <section>
+          <fieldset>
+            <legend>实名认证信息</legend>
+            <input id="person-realname" type="text" name="person_realname" required="required"
+            placeholder="真实姓名"
+            ng-model="personRealname"
+            />
+            <code class="debugcode" ng-show="debug">
+              personRealname = {{personRealname}}<br />
+              signupForm.person_realname.$error = {{signupForm.person_realname.$error}}
+            </code>
+            <input id="person-phone" type="text" name="person_phone" required="required"
+            placeholder="联系电话"
+            ng-model="personPhone"
+            ng-pattern="/^[0-9]{7,11}$/"
+            />
+            <code class="debugcode" ng-show="debug">
+              personPhone = {{personPhone}}<br />
+              signupForm.person_phone.$error = {{signupForm.person_phone.$error}}
+            </code>
 
-          <label id="label-person-role" for="person_role">你的身份</label>
-          <dl id="person-role">
-            <dt><input id="person-role-student" type="radio" name="person_role" value="student" ng-model="personRole" /></dt><dd>学生</dd>
-            <dt><input id="person-role-staff" type="radio" name="person_role" value="staff" ng-model="personRole" /></dt><dd>教职工</dd>
-          </dl>
-        </fieldset>
+            <label id="label-person-role" for="person_role">你的身份</label>
+            <dl id="person-role">
+              <dt><input id="person-role-student" type="radio" name="person_role" value="stud" required="required" ng-model="personRole" /></dt><dd>在读学生</dd>
+              <dt><input id="person-role-staff" type="radio" name="person_role" value="staff" required="required" ng-model="personRole" /></dt><dd>教职工</dd>
+              <dt><input id="person-role-alumni" type="radio" name="person_role" value="alumni" required="required" ng-model="personRole" /></dt><dd>毕业校友</dd>
+            </dl><br />
 
-        <fieldset>
-          <legend>实名认证信息 &mdash; 续</legend>
-          <div ng-switch="personRole">
-            <section ng-switch-when="student">
-              <input id="person-stud-number" type="text" name="person_stud_number"
-              placeholder="学号"
-              ng-model="personStudNumber"
-              ng-pattern="/^[0-9]{10}$/"
-              ng-required="personRole == 'student'"
-              />
+            <label id="label-person-stud-role" for="person_stud_role" ng-show="isStudent">你的学历</label>
+            <dl id="person-stud-role" ng-show="isStudent">
+              <dt><input id="person-stud-role-ugrad" type="radio" name="person_stud_role" value="ugrad" ng-model="personStudRole" ng-required="isStudent" /></dt><dd>本科生</dd>
+              <dt><input id="person-stud-role-grad" type="radio" name="person_stud_role" value="grad" ng-model="personStudRole" ng-required="isStudent" /></dt><dd>研究生</dd>
+            </dl>
+            <code class="debugcode" ng-show="debug">
+              personRole = {{personRole}}<br />
+              signupForm.person_role.$error = {{signupForm.person_role.$error}}<br />
+              personStudRole = {{personStudRole}}<br />
+              signupForm.person_stud_role.$error = {{signupForm.person_stud_role.$error}}<br />
+              <br />
+              isStudent = {{isStudent}}<br />
+              isStaff = {{isStaff}}<br />
+              isInCampus = {{isInCampus}}<br />
+              isUgrad = {{isUgrad}}<br />
+              isGrad = {{isGrad}}
+            </code>
 
-              <fieldset class="sub-fieldset">
-                <legend>就读班级信息</legend>
-                <select id="person-stud-school" name="person_stud_school"
-                  ng-model="personStudSchool"
-                  ng-required="personRole == 'student'"
-                  >
-                  <option value="">学院</option>
-                </select>
-                <select id="person-stud-dept" name="person_stud_dept"
-                  ng-model="personStudDept"
-                  ng-required="personRole == 'student'"
-                  >
-                  <option value="">专业</option>
-                </select>
-                <select id="person-stud-class" name="person_stud_class"
-                  ng-model="personStudClass"
-                  ng-required="personRole == 'student'"
-                  >
-                  <option value="">班级</option>
-                </select>
-              </fieldset>
+          </fieldset>
+        </section>
 
-              <fieldset class="sub-fieldset">
-                <legend>通讯地址信息</legend>
-                <select id="person-stud-dorm-complex" name="person_stud_dorm_complex"
-                  ng-model="personStudDormComplex"
-                  ng-required="personRole == 'student'"
-                  >
-                  <option value="">寝室园区</option>
-                </select>
-                <select id="person-stud-dorm-bldg" name="person_stud_dorm_bldg"
-                  ng-model="personStudDormBldg"
-                  ng-required="personRole == 'student'"
-                  >
-                  <option value="">楼号</option>
-                </select>
-                <input id="person-stud-dorm-room" type="text" name="person_stud_dorm_room"
-                placeholder="寝室号"
-                ng-model="personStudDormRoom"
-                ng-required="personRole == 'student'"
+        <section>
+          <fieldset>
+            <legend>实名认证信息 &mdash; 续</legend>
+            <div>
+              <section ng-show="isStudent">
+                <input id="person-ugrad-number" type="text" name="person_ugrad_number"
+                placeholder="本科生学号"
+                ng-model="personUgradNumber"
+                ng-pattern="/^[0-9]{10}$/"
+                ng-show="isUgrad"
+                ng-required="isUgrad"
                 />
-              </fieldset>
-            </section>
+                <input id="person-grad-number" type="text" name="person_grad_number"
+                placeholder="研究生学号"
+                ng-model="personGradNumber"
+                ng-pattern="/^[0-9]{10}$/"
+                ng-show="isGrad"
+                ng-required="isGrad"
+                />
+                <code class="debugcode" ng-show="debug">
+                  personUgradNumber = {{personUgradNumber}}<br />
+                  signupForm.person_ugrad_number.$error = {{signupForm.person_ugrad_number.$error}}<br />
+                  personGradNumber = {{personGradNumber}}<br />
+                  signupForm.person_grad_number.$error = {{signupForm.person_grad_number.$error}}
+                </code>
 
-            <section ng-switch-when="staff">
-              <input id="person-staff-number" type="text" name="person_staff_number"
-              placeholder="工号"
-              ng-model="personStaffNumber"
-              ng-required="personRole == 'staff'"
-              />
-              <select id="person-staff-dept" name="person_staff_dept"
-                ng-model="personStaffDept"
-                ng-required="personRole == 'staff'"
-                >
-                <option value="">工作部门</option>
-              </select>
-            </section>
+                <fieldset class="sub-fieldset">
+                  <legend>就读班级信息</legend>
+                  <select id="person-stud-school" name="person_stud_school"
+                    ng-model="personStudSchool"
+                    ng-required="isStudent"
+                    >
+                    <option value="">学院</option>
+                  </select>
+                  <select id="person-stud-dept" name="person_stud_dept"
+                    ng-model="personStudDept"
+                    ng-required="isStudent"
+                    >
+                    <option value="">专业</option>
+                  </select>
+                  <select id="person-stud-class" name="person_stud_class"
+                    ng-model="personStudClass"
+                    ng-required="isStudent"
+                    >
+                    <option value="">班级</option>
+                  </select>
+                  <code class="debugcode" ng-show="debug">
+                    personStudSchool = {{personStudSchool}}<br />
+                    personStudDept = {{personStudDept}}<br />
+                    personStudClass = {{personStudClass}}<br />
+                    signupForm.person_stud_school.$error = {{signupForm.person_stud_school.$error}}<br />
+                    signupForm.person_stud_dept.$error = {{signupForm.person_stud_dept.$error}}<br />
+                    signupForm.person_stud_class.$error = {{signupForm.person_stud_class.$error}}
+                  </code>
+                </fieldset>
 
-            <section ng-switch-default="ng-switch-default">
-              选择你的身份来展开相应项目。
-            </section>
-          </div>
-        </fieldset>
+                <fieldset class="sub-fieldset">
+                  <legend>通讯地址信息</legend>
+                  <select id="person-stud-dorm-complex" name="person_stud_dorm_complex"
+                    ng-model="personStudDormComplex"
+                    ng-required="isStudent"
+                    >
+                    <option value="">寝室园区</option>
+                  </select>
+                  <select id="person-stud-dorm-bldg" name="person_stud_dorm_bldg"
+                    ng-model="personStudDormBldg"
+                    ng-required="isStudent"
+                    >
+                    <option value="">楼号</option>
+                  </select>
+                  <input id="person-stud-dorm-room" type="text" name="person_stud_dorm_room"
+                  placeholder="寝室号"
+                  ng-model="personStudDormRoom"
+                  ng-required="isStudent"
+                  />
+                  <code class="debugcode" ng-show="debug">
+                    personStudDormComplex = {{personStudDormComplex}}<br />
+                    personStudDormBldg = {{personStudDormBldg}}<br />
+                    personStudDormRoom = {{personStudDormRoom}}<br />
+                    signupForm.person_stud_dorm_complex.$error = {{signupForm.person_stud_dorm_complex.$error}}<br />
+                    signupForm.person_stud_dorm_bldg.$error = {{signupForm.person_stud_dorm_bldg.$error}}<br />
+                    signupForm.person_stud_dorm_room.$error = {{signupForm.person_stud_dorm_room.$error}}
+                  </code>
+                </fieldset>
+              </section>
 
-        <hr />
+              <section ng-show="isStaff">
+                <input id="person-staff-number" type="text" name="person_staff_number"
+                placeholder="工号"
+                ng-model="personStaffNumber"
+                ng-required="isStaff"
+                />
+                <select id="person-staff-dept" name="person_staff_dept"
+                  ng-model="personStaffDept"
+                  ng-required="isStaff"
+                  >
+                  <option value="">工作部门</option>
+                </select>
+              </section>
 
-        <fieldset>
-          <legend>完成</legend>
-          <input id="submit" type="submit" name="submit" value="提交注册" />
-        </fieldset>
+              <section ng-show="!isStudent && !isStaff">
+                选择你的身份来展开相应项目。
+              </section>
+            </div>
+          </fieldset>
+        </section>
+
+        <section>
+          <fieldset>
+            <legend>完成</legend>
+            <input id="submit" type="submit" name="submit" value="提交注册" />
+          </fieldset>
+        </section>
       </form>
     </article>
+
+    <script src="/js/signup.js"></script>
   </body>
 <!-- vim:set ai et ts=2 sw=2 sts=2 fenc=utf-8: -->
 </html>
