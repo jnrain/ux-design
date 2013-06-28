@@ -18,7 +18,8 @@ requirejs(
     ['jquery', 'angular', 'jquery.ui', 'jquery.backstretch'],
     function($, angular) {
       var IMGPATHS = [
-          '//staging.jnrain.com/test-img/rain-light.jpg'
+          // '//staging.jnrain.com/test-img/rain-light.jpg'
+          '//staging.jnrain.com/test-img/sky-dark.jpg'
           // '//bbs.jnrain.com/face2/1.jpg',
           // '//bbs.jnrain.com/face2/2.jpg',
           // '//bbs.jnrain.com/face2/3.jpg',
