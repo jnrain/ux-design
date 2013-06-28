@@ -138,8 +138,12 @@ html, body {
   background-color: rgba(255, 255, 255, 0.3);
 }
 
+#screen.bg-dark #signinform>input[type="text"]::placeholder,
 #screen.bg-dark #signinform>input[type="text"]::-moz-placeholder,
-#screen.bg-dark #signinform>input[type="password"]::-moz-placeholder {
+#screen.bg-dark #signinform>input[type="text"]::-webkit-placeholder,
+#screen.bg-dark #signinform>input[type="password"]::placeholder,
+#screen.bg-dark #signinform>input[type="password"]::-moz-placeholder,
+#screen.bg-dark #signinform>input[type="password"]::-webkit-placeholder {
   color: #000;
   opacity: 0.375;
 }
@@ -155,8 +159,12 @@ html, body {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
+#screen.bg-light #signinform>input[type="text"]::placeholder,
 #screen.bg-light #signinform>input[type="text"]::-moz-placeholder,
-#screen.bg-light #signinform>input[type="password"]::-moz-placeholder {
+#screen.bg-light #signinform>input[type="text"]::-webkit-placeholder,
+#screen.bg-light #signinform>input[type="password"]::placeholder,
+#screen.bg-light #signinform>input[type="password"]::-moz-placeholder,
+#screen.bg-light #signinform>input[type="password"]::-webkit-placeholder {
   color: #fff;
   opacity: 0.4;
 }
