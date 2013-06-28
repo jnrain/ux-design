@@ -4,6 +4,7 @@
 requirejs.config({
   baseUrl: '//static.jnrain.com/common/js',
   shim: {
+    'jquery.ui': ['jquery'],
     'jquery.backstretch': ['jquery'],
     'angular': {
       deps: ['jquery'],  // force use of real jQuery
@@ -14,7 +15,7 @@ requirejs.config({
 
 
 requirejs(
-    ['jquery', 'angular', 'jquery.backstretch'],
+    ['jquery', 'angular', 'jquery.ui', 'jquery.backstretch'],
     function($, angular) {
       var IMGPATHS = [
           '//staging.jnrain.com/test-img/rain-light.jpg'
@@ -27,6 +28,11 @@ requirejs(
             duration: 5000,
             fade: 500
           },
+          LOGINBOX_DRAG_CONFIG = {
+            handle: '#loginbox-titlebar',
+            containment: '#screen',
+            scroll: false
+          },
           mod = angular.module('jnrain2-signin', []);
 
       mod.controller('SigninForm', function($scope) {
@@ -35,7 +41,7 @@ requirejs(
 
       $(document).ready(function() {
         $('#eventshots').backstretch(IMGPATHS, BS_CONFIG);
-        $('')
+        $('#loginbox').draggable(LOGINBOX_DRAG_CONFIG);
 
         angular.bootstrap($('#loginbox-inner'), ['jnrain2-signin']);
       });
