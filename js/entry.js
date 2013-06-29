@@ -2,16 +2,21 @@
 
 
 requirejs(
-    ['angular', 'angular-dragdrop'],
+    ['angular', 'angular-sanitize', 'angular-dragdrop'],
     function(angular) {
-      var IMGPATHS = [
-          // '//staging.jnrain.com/test-img/rain-light.jpg'
-          '//staging.jnrain.com/test-img/sky-dark.jpg'
-          // '//bbs.jnrain.com/face2/1.jpg',
-          // '//bbs.jnrain.com/face2/2.jpg',
-          // '//bbs.jnrain.com/face2/3.jpg',
-          // '//bbs.jnrain.com/face2/4.jpg'
-          ],
+      var EVENTS = [
+          {
+            href: '//staging.jnrain.com/test-img/rain-light.jpg',
+            desc: '第一张图',
+            thumbHref: 'http://bbs.jnrain.com/face2/02.jpg',
+            bgClass: 'bg-light'
+          },
+          {
+            href: '//staging.jnrain.com/test-img/sky-dark.jpg',
+            desc: '这里是进站图配套说明文字。<a href="#">这是一个链接</a>。',
+            thumbHref: 'http://bbs.jnrain.com/face2/03.jpg',
+            bgClass: 'bg-dark'
+          }],
           BS_CONFIG = {
             duration: 5000,
             fade: 500
@@ -21,12 +26,21 @@ requirejs(
             containment: '#screen',
             scroll: false
           },
-          mod = angular.module('jnrain2-signin', ['ngDragDrop']);
+          mod = angular.module('jnrain2-signin', ['ngSanitize', 'ngDragDrop']);
 
       mod.controller('SigninForm', function($scope) {
         console.log($scope);
       }).controller('SigninBox', function($scope) {
         $scope.nativeDragOptions = LOGINBOX_DRAG_CONFIG;
+      }).controller('EventScreen', function($scope) {
+        $scope.events = EVENTS;
+        $scope.currEvent = 1;
+        $scope.switchToShot = (function(idx) {
+          // console.log('switchToShot: ' + idx);
+          $scope.currEvent = idx;
+        });
+
+        console.log($scope);
       });
 
       angular.bootstrap(angular.element('#screen'), ['jnrain2-signin']);

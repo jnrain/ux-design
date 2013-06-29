@@ -19,7 +19,7 @@ html {
 }
 
 body {
-  background-color: #000;
+  background-color: #c2f090;
 }
 
 html, body {
@@ -226,11 +226,30 @@ html, body {
   z-index: -10;
 }
 
+#eventshots>.shot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  visibility: hidden;
+  z-index: -1000;
+}
+
+#eventshots>.shot-active {
+  visibility: visible;
+  z-index: -10;
+}
+
 #eventtitle {
   position: absolute;
   bottom: 10%;
   left: 5%;
-  width: 60%;
+  width: 85%;
 
   font-size: 200%;
 /*
@@ -304,6 +323,9 @@ body.zh-cn #eventtitle:before {
   height: 100px;
   margin: 0 0 8px;
   opacity: 0.5;
+
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 #eventlist>li:last-child {
@@ -359,7 +381,7 @@ body.zh-cn #eventtitle:before {
   </head>
 
   <body class="zh-cn">
-  <div id="screen" class="bg-dark">
+  <div id="screen" ng-controller="EventScreen" ng-class="events[currEvent].bgClass">
     <section id="loginbox" ng-controller="SigninBox" data-drag="true" jqyoui-draggable data-jqyoui-options="nativeDragOptions">
       <div id="loginbox-titlebar"></div>
       <div id="loginbox-content">
@@ -385,17 +407,17 @@ body.zh-cn #eventtitle:before {
     </section>
 
     <figure id="event-screen">
-      <div id="eventshots"></div>
-      <figcaption id="eventtitle">这里是进站图配套说明文字。<a href="#">这是一个链接</a>。</figcaption>
+      <div id="eventshots">
+        <div ng-repeat="evt in events" ng-style="{ 'background-image': 'url(' + evt.href + ')' }" ng-class="{ 'shot': true, 'shot-active': $index == currEvent }"></div>
+      </div>
+      <figcaption id="eventtitle" ng-bind-html="events[currEvent].desc"></figcaption>
+      <div id="eventlist-container">
+        <ul id="eventlist">
+          <li ng-repeat="evt in events" ng-style="{ 'background-image': 'url(' + evt.thumbHref + ')' }" ng-click="switchToShot($index)"></li>
+        </ul>
+      </div>
     </figure>
-
-    <div id="eventlist-container">
-      <ul id="eventlist">
-        <li></li>
-        <li></li>
-      </ul>
-    </div>
-  </div>
+ </div>
 
   <script src="js/entry.js"></script>
   </body>
