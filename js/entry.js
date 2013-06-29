@@ -1,20 +1,6 @@
 'use strict';
 
 
-requirejs.config({
-  baseUrl: '//static.jnrain.com/common/js',
-  shim: {
-    'jquery.ui': ['jquery'],
-    'jquery.backstretch': ['jquery'],
-    'angular': {
-      deps: ['jquery'],  // force use of real jQuery
-      exports: 'angular'
-    },
-    'angular-dragdrop': ['jquery.ui', 'angular']
-  }
-});
-
-
 requirejs(
     ['angular', 'angular-dragdrop'],
     function(angular) {
