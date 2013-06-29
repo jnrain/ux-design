@@ -8,6 +8,7 @@ var require = {
     'jquery.backstretch': ['jquery'],
     'garlic': ['jquery'],
     'parsley': ['jquery'],
+    'supersized.core': ['jquery'],
     'angular': {
       deps: ['jquery'],  // force use of real jQuery
       exports: 'angular'
