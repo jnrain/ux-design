@@ -9,14 +9,15 @@ requirejs.config({
     'angular': {
       deps: ['jquery'],  // force use of real jQuery
       exports: 'angular'
-    }
+    },
+    'angular-dragdrop': ['jquery.ui', 'angular']
   }
 });
 
 
 requirejs(
-    ['jquery', 'angular', 'jquery.ui', 'jquery.backstretch'],
-    function($, angular) {
+    ['angular', 'angular-dragdrop'],
+    function(angular) {
       var IMGPATHS = [
           // '//staging.jnrain.com/test-img/rain-light.jpg'
           '//staging.jnrain.com/test-img/sky-dark.jpg'
@@ -36,16 +37,18 @@ requirejs(
           },
           mod = angular.module('jnrain2-signin', []);
 
-      mod.controller('SigninForm', function($scope) {
+      mod.controller('SigninBox', function($scope) {
+        $scope.jqyouiOptions = LOGINBOX_DRAG_CONFIG;
+      }).controller('SigninForm', function($scope) {
         console.log($scope);
       });
-
+/*
       $(document).ready(function() {
         $('#eventshots').backstretch(IMGPATHS, BS_CONFIG);
         $('#loginbox').draggable(LOGINBOX_DRAG_CONFIG);
 
-        angular.bootstrap($('#loginbox-inner'), ['jnrain2-signin']);
-      });
+      });*/
+      angular.bootstrap(angular.element('#screen'), ['jnrain2-signin']);
     });
 
 
