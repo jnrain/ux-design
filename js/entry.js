@@ -35,19 +35,14 @@ requirejs(
             containment: '#screen',
             scroll: false
           },
-          mod = angular.module('jnrain2-signin', []);
+          mod = angular.module('jnrain2-signin', ['ngDragDrop']);
 
-      mod.controller('SigninBox', function($scope) {
-        $scope.jqyouiOptions = LOGINBOX_DRAG_CONFIG;
-      }).controller('SigninForm', function($scope) {
+      mod.controller('SigninForm', function($scope) {
         console.log($scope);
+      }).controller('SigninBox', function($scope) {
+        $scope.nativeDragOptions = LOGINBOX_DRAG_CONFIG;
       });
-/*
-      $(document).ready(function() {
-        $('#eventshots').backstretch(IMGPATHS, BS_CONFIG);
-        $('#loginbox').draggable(LOGINBOX_DRAG_CONFIG);
 
-      });*/
       angular.bootstrap(angular.element('#screen'), ['jnrain2-signin']);
     });
 
