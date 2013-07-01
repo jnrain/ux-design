@@ -9,7 +9,9 @@
     <meta name="author" content="JNRain" />
 
     <!-- styles -->
-    <link rel="stylesheet" href="http://static.jnrain.com/common/css/reset.css" />
+    <link rel="stylesheet" href="//static.jnrain.com/common/css/normalize.css" />
+    <link rel="stylesheet" href="//static.jnrain.com/common/css/reset.css" />
+    <link rel="stylesheet" href="//static.jnrain.com/common/standalone/select2/select2.css" />
 
     <style>
       body {
@@ -346,18 +348,21 @@
                 <fieldset class="sub-fieldset">
                   <legend>就读班级信息</legend>
                   <select id="person-stud-school" name="person_stud_school"
+                    ui-select2
                     ng-model="personStudSchool"
                     ng-required="isStudent"
                     >
                     <option value="">学院</option>
                   </select>
                   <select id="person-stud-dept" name="person_stud_dept"
+                    ui-select2
                     ng-model="personStudDept"
                     ng-required="isStudent"
                     >
                     <option value="">专业</option>
                   </select>
                   <select id="person-stud-class" name="person_stud_class"
+                    ui-select2
                     ng-model="personStudClass"
                     ng-required="isStudent"
                     >
@@ -376,12 +381,14 @@
                 <fieldset class="sub-fieldset">
                   <legend>通讯地址信息</legend>
                   <select id="person-stud-dorm-complex" name="person_stud_dorm_complex"
+                    ui-select2
                     ng-model="personStudDormComplex"
                     ng-required="isStudent"
                     >
                     <option value="">寝室园区</option>
                   </select>
                   <select id="person-stud-dorm-bldg" name="person_stud_dorm_bldg"
+                    ui-select2
                     ng-model="personStudDormBldg"
                     ng-required="isStudent"
                     >
@@ -410,6 +417,7 @@
                 ng-required="isStaff"
                 />
                 <select id="person-staff-dept" name="person_staff_dept"
+                  ui-select2
                   ng-model="personStaffDept"
                   ng-required="isStaff"
                   >
