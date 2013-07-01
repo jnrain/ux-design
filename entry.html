@@ -297,7 +297,7 @@ body.zh-cn #eventtitle:before {
   text-decoration: underline;
 }
 
-#eventlist-container {
+.vertmiddle-outer {
   /*
    * 垂直居中
    * http://www.jakpsatweb.cz/css/css-vertical-center-solution.html
@@ -309,32 +309,75 @@ body.zh-cn #eventtitle:before {
   top: 0;
   right: 0;
   height: 100%;
+}
+
+#eventlist-container {
   width: 100px;  /* 100px + 8px * 2 */
   padding: 0 8px;
   z-index: 5;
 }
 
-#eventlist {
+.eventlist-list {
+  /* 垂直居中 trick 的另一部分 */
   display: table-cell;
   vertical-align: middle;
 }
 
-#eventlist>li {
-  width: 100px;
+.eventlist-list>li {
   height: 100px;
   margin: 0 0 8px;
-  opacity: 0.5;
 
   background-repeat: no-repeat;
   background-size: contain;
 }
 
-#eventlist>li:last-child {
+.eventlist-list>li:last-child {
   margin: 0;
 }
 
-#eventlist>li:hover {
+#eventlist>li {
+  /* 缩略图宽度，这个和小三角的宽度当然是不一样的 */
+  width: 100px;
+
+  /* 缩略图的透明度 */
+  opacity: 0.5;
+}
+
+#eventlist>li:hover,
+#eventlist>li.shot-active {
+  /* 还是透明度 */
   opacity: 1;
+}
+
+#eventlist-indicators-container {
+  top: 0;
+  right: 116px;  /* 100px 的 #eventlist-container + 8px 的 margin * 2 */
+  width: 18px;
+  height: 100%;
+  z-index: 6;
+}
+
+/* 指示当前显示进站的小三角 */
+.eventlist-indicator {
+  position: relative;
+}
+
+.eventlist-indicator>.indicator {
+  /*
+   * CSS 三角形，看这里
+   * http://css-tricks.com/snippets/css/css-triangle/
+   * http://apps.eky.hk/css-triangle-generator/
+   */
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10px 0 10px 17.3px;
+  border-color: transparent;
+
+  /* 定位到相应元素的中间 */
+  position: absolute;
+  top: 40px;  /* (100 - 20) / 2 */
+  right: 0;
 }
 
 #screen.bg-dark #eventlist-container {
@@ -370,6 +413,13 @@ body.zh-cn #eventtitle:before {
   background-color: rgba(0, 0, 0, 0.2);
 }
 
+#screen.bg-dark .eventlist-indicator>.indicator {
+  border-left-color: rgba(255, 255, 255, 0.75);
+}
+
+#screen.bg-light .eventlist-indicator>.indicator {
+  border-left-color: rgba(0, 0, 0, 0.75);
+}
     </style>
 
     <!-- framework js -->
@@ -412,9 +462,16 @@ body.zh-cn #eventtitle:before {
         <div ng-repeat="evt in events" ng-style="bkgndImage(evt.href)" ng-class="{ 'shot': true, 'shot-active': $index == currEvent }"></div>
       </div>
       <figcaption id="eventtitle" ng-bind-html="events[currEvent].desc"></figcaption>
-      <div id="eventlist-container">
-        <ul id="eventlist">
-          <li ng-repeat="evt in events" ng-style="bkgndImage(evt.thumbHref)" ng-click="switchToShot($index)"></li>
+      <div id="eventlist-container" class="vertmiddle-outer">
+        <ul id="eventlist" class="eventlist-list">
+          <li ng-repeat="evt in events" ng-style="bkgndImage(evt.thumbHref)" ng-class="{'shot-active': $index == currEvent }" ng-click="switchToShot($index)"></li>
+        </ul>
+      </div>
+      <div id="eventlist-indicators-container" class="vertmiddle-outer">
+        <ul id="eventlist-indicators" class="eventlist-list">
+          <li ng-repeat="evt in events" class="eventlist-indicator">
+          <div class="indicator" ng-show="$index == currEvent"></div>
+          </li>
         </ul>
       </div>
     </figure>
