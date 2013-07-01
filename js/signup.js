@@ -2,9 +2,9 @@
 
 
 requirejs(
-    ['jquery', 'angular'],
+    ['jquery', 'angular', 'angular-ui-select2'],
     function($, angular) {
-      var mod = angular.module('jnrain2-reg', []);
+      var mod = angular.module('jnrain2-reg', ['ui.select2']);
 
       mod.controller('SignupForm', function($scope) {
         console.log($scope);
