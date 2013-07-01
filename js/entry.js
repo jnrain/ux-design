@@ -17,10 +17,6 @@ requirejs(
             thumbHref: 'http://bbs.jnrain.com/face2/03.jpg',
             bgClass: 'bg-dark'
           }],
-          BS_CONFIG = {
-            duration: 5000,
-            fade: 500
-          },
           LOGINBOX_DRAG_CONFIG = {
             handle: '#loginbox-titlebar',
             containment: '#screen',
@@ -38,6 +34,9 @@ requirejs(
         $scope.switchToShot = (function(idx) {
           // console.log('switchToShot: ' + idx);
           $scope.currEvent = idx;
+        });
+        $scope.bkgndImage = (function(url) {
+          return { 'background-image': 'url(' + url + ')' };
         });
 
         console.log($scope);

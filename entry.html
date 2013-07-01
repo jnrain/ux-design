@@ -409,12 +409,12 @@ body.zh-cn #eventtitle:before {
 
     <figure id="event-screen">
       <div id="eventshots">
-        <div ng-repeat="evt in events" ng-style="{ 'background-image': 'url(' + evt.href + ')' }" ng-class="{ 'shot': true, 'shot-active': $index == currEvent }"></div>
+        <div ng-repeat="evt in events" ng-style="bkgndImage(evt.href)" ng-class="{ 'shot': true, 'shot-active': $index == currEvent }"></div>
       </div>
       <figcaption id="eventtitle" ng-bind-html="events[currEvent].desc"></figcaption>
       <div id="eventlist-container">
         <ul id="eventlist">
-          <li ng-repeat="evt in events" ng-style="{ 'background-image': 'url(' + evt.thumbHref + ')' }" ng-click="switchToShot($index)"></li>
+          <li ng-repeat="evt in events" ng-style="bkgndImage(evt.thumbHref)" ng-click="switchToShot($index)"></li>
         </ul>
       </div>
     </figure>
