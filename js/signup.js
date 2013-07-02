@@ -1,18 +1,6 @@
 'use strict';
 
 
-requirejs.config({
-  baseUrl: '//static.jnrain.com/common/js',
-  shim: {
-    'garlic': ['jquery'],
-    'parsley': ['jquery'],
-    'angular': {
-      exports: 'angular'
-    }
-  }
-});
-
-
 requirejs(
     ['jquery', 'angular', 'angular-ui-select2'],
     function($, angular) {
