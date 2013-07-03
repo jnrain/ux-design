@@ -23,7 +23,7 @@ requirejs(
             scroll: false
           },
           SWITCH_INTERVAL = 8000,
-          THUMBNAIL_HOVER_SWITCH_INTERVAL = 1500,
+          THUMBNAIL_HOVER_SWITCH_INTERVAL = 1000,
           mod = angular.module('jnrain2-signin', ['ngSanitize', 'ngDragDrop']),
           SigninForm = (function($scope) {
             console.log($scope);
