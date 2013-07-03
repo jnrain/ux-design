@@ -353,7 +353,10 @@
                     ng-model="personStudSchool"
                     ng-required="isStudent"
                     >
-                    <option value="">学院</option>
+                    <option value="">请选择一个学院</option>
+                    <optgroup ng-repeat="grp in schoolInfo.schoolgroups" label="{{grp.name}}">
+                      <option ng-repeat="sch in grp.schools" value="{{sch.id}}">{{sch.name}}</option>
+                    </optgroup>
                   </select>
                   <select id="person-stud-dept" name="person_stud_dept"
                     ui-select2
