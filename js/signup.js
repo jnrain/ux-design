@@ -2,13 +2,18 @@
 
 
 requirejs(
-    ['jquery', 'angular', 'angular-ui-select2'],
+    ['jquery', 'angular', 'angular-resource', 'angular-ui-select2'],
     function($, angular) {
-      var mod = angular.module('jnrain2-reg', ['ui.select2']);
+      var mod = angular.module('jnrain2-reg', ['ngResource', 'ui.select2']),
+          UNIV_ID = 'jnu';
 
-      mod.controller('SignupForm', function($scope) {
+      mod.controller('SignupForm', function($scope, $resource) {
+        var SchoolInfo = $resource('univ/:univId/schools.json');
+
         console.log($scope);
         $scope.debug = true;
+
+        $scope.schoolInfo = SchoolInfo.get({ univId: UNIV_ID });;
 
         $scope.$watch('personRole', function(to, from) {
           $scope.isStudent = to == 'stud' || to == 'alumni';
