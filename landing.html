@@ -491,7 +491,14 @@ body.zh-cn #evttitles-container:before {
 
   <body class="zh-cn">
   <div id="screen" ng-controller="EventScreen" ng-class="events[currEvent].bgClass">
-    <section id="loginbox" ng-controller="SigninBox" data-drag="true" jqyoui-draggable data-jqyoui-options="nativeDragOptions">
+    <section id="loginbox"
+      ng-controller="SigninBox"
+      data-drag="true"
+      jqyoui-draggable
+      data-jqyoui-options="nativeDragOptions"
+      ng-mouseenter="cancelImageTimer()"
+      ng-mouseleave="newImageTimer()"
+      >
       <div id="loginbox-titlebar"></div>
       <div id="loginbox-content">
         <div id="loginbox-inner">
@@ -524,14 +531,27 @@ body.zh-cn #evttitles-container:before {
       <figcaption id="eventtitle">
       <div id="evttitles-container">
         <ul id="evttitles">
-          <li ng-repeat="evt in events" ng-class="{ 'evttitle': true, 'evttitle-active': $index == currEvent }" ng-bind-html="evt.desc"></li>
+          <li
+          ng-repeat="evt in events"
+          ng-class="{ 'evttitle': true, 'evttitle-active': $index == currEvent }"
+          ng-bind-html="evt.desc"
+          ng-mouseenter="cancelImageTimer()"
+          ng-mouseleave="newImageTimer()"
+          ></li>
         </ul>
       </div>
       </figcaption>
 
       <div id="eventlist-container" class="vertmiddle-outer">
         <ul id="eventlist" class="eventlist-list">
-          <li ng-repeat="evt in events" ng-style="bkgndImage(evt.thumbHref)" ng-class="{ 'shot-active': $index == currEvent }" ng-click="switchToShot($index, true)"></li>
+          <li
+          ng-repeat="evt in events"
+          ng-style="bkgndImage(evt.thumbHref)"
+          ng-class="{ 'shot-active': $index == currEvent }"
+          ng-click="cancelHoverTimer(false).switchToShot($index, false)"
+          ng-mouseenter="newHoverTimer($index)"
+          ng-mouseleave="cancelHoverTimer(true)"
+          ></li>
         </ul>
       </div>
       <div id="eventlist-indicators-container" class="vertmiddle-outer">
