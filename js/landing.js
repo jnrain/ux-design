@@ -60,28 +60,28 @@ requirejs(
             });
 
             $scope.newImageTimer = (function() {
-              console.log('newImageTimer');
+              // console.log('newImageTimer');
               if ($scope.nextImageTimer === null) {
                 $scope.nextImageTimer = $timeout($scope.nextShot, SWITCH_INTERVAL);
-                console.log('image timer created');
+                // console.log('image timer created');
               }
 
               return $scope;
             });
 
             $scope.cancelImageTimer = (function() {
-              console.log('cancelImageTimer');
+              // console.log('cancelImageTimer');
               if ($scope.nextImageTimer !== null) {
                 $timeout.cancel($scope.nextImageTimer);
                 $scope.nextImageTimer = null;
-                console.log('image timer cancelled');
+                // console.log('image timer cancelled');
               }
 
               return $scope;
             });
 
             $scope.newHoverTimer = (function(idx) {
-              console.log('newHoverTimer');
+              // console.log('newHoverTimer');
               $scope
               // 终止任何可能没结束的缩略图悬停定时器
               .cancelHoverTimer()
@@ -98,11 +98,11 @@ requirejs(
             });
 
             $scope.cancelHoverTimer = (function(refreshTimer) {
-              console.log('cancelHoverTimer');
+              // console.log('cancelHoverTimer');
               if ($scope.thumbHoverTimer !== null) {
                 $timeout.cancel($scope.thumbHoverTimer);
                 $scope.thumbHoverTimer = null;
-                console.log('hover timer cancelled');
+                // console.log('hover timer cancelled');
               }
 
               // 需要时重启全局定时器
