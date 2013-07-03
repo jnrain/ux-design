@@ -531,7 +531,7 @@ body.zh-cn #evttitles-container:before {
 
       <div id="eventlist-container" class="vertmiddle-outer">
         <ul id="eventlist" class="eventlist-list">
-          <li ng-repeat="evt in events" ng-style="bkgndImage(evt.thumbHref)" ng-class="{ 'shot-active': $index == currEvent }" ng-click="switchToShot($index)"></li>
+          <li ng-repeat="evt in events" ng-style="bkgndImage(evt.thumbHref)" ng-class="{ 'shot-active': $index == currEvent }" ng-click="switchToShot($index, true)"></li>
         </ul>
       </div>
       <div id="eventlist-indicators-container" class="vertmiddle-outer">

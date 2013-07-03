@@ -22,29 +22,49 @@ requirejs(
             containment: '#screen',
             scroll: false
           },
-          mod = angular.module('jnrain2-signin', ['ngSanitize', 'ngDragDrop']);
+          SWITCH_INTERVAL = 8000,
+          mod = angular.module('jnrain2-signin', ['ngSanitize', 'ngDragDrop']),
+          SigninForm = (function($scope) {
+            console.log($scope);
+          }),
+          SigninBox = (function($scope) {
+            $scope.nativeDragOptions = LOGINBOX_DRAG_CONFIG;
+          }),
+          EventScreen = (function($scope, $timeout) {
+            $scope.events = EVENTS;
+            $scope.prevEvent = $scope.currEvent = 1;
+            $scope.switchToShot = (function(idx, resetTimer) {
+              if ($scope.currEvent == idx) {
+                return;
+              }
 
-      mod.controller('SigninForm', function($scope) {
-        console.log($scope);
-      }).controller('SigninBox', function($scope) {
-        $scope.nativeDragOptions = LOGINBOX_DRAG_CONFIG;
-      }).controller('EventScreen', function($scope) {
-        $scope.events = EVENTS;
-        $scope.prevEvent = $scope.currEvent = 1;
-        $scope.switchToShot = (function(idx) {
-          if ($scope.currEvent == idx) {
-            return;
-          }
+              $scope.prevEvent = $scope.currEvent;
+              $scope.currEvent = idx;
 
-          $scope.prevEvent = $scope.currEvent;
-          $scope.currEvent = idx;
-        });
-        $scope.bkgndImage = (function(url) {
-          return { 'background-image': 'url(' + url + ')' };
-        });
+              resetTimer ? $timeout.cancel($scope.nextImageTimer) : 0;
+              $scope.nextImageTimer = $timeout($scope.nextShot, SWITCH_INTERVAL);
+            });
+            $scope.bkgndImage = (function(url) {
+              return {
+                "background-image": "url(" + url + ")"
+              };
+            });
+            $scope.nextShot = (function() {
+              var evt = $scope.currEvent;
 
-        console.log($scope);
-      });
+              $scope.switchToShot(evt == EVENTS.length - 1 ? 0 : evt + 1, false);
+            });
+            $scope.nextImageTimer = $timeout($scope.nextShot, SWITCH_INTERVAL);
+
+            console.log($scope);
+          });
+
+      SigninForm.$inject = ['$scope'];
+      SigninBox.$inject = ['$scope'];
+      EventScreen.$inject = ['$scope', '$timeout'];
+      mod.controller('SigninForm', SigninForm)
+        .controller('SigninBox', SigninBox)
+        .controller('EventScreen', EventScreen);
 
       angular.bootstrap(angular.element('#screen'), ['jnrain2-signin']);
     });
