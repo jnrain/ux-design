@@ -30,9 +30,13 @@ requirejs(
         $scope.nativeDragOptions = LOGINBOX_DRAG_CONFIG;
       }).controller('EventScreen', function($scope) {
         $scope.events = EVENTS;
-        $scope.currEvent = 1;
+        $scope.prevEvent = $scope.currEvent = 1;
         $scope.switchToShot = (function(idx) {
-          // console.log('switchToShot: ' + idx);
+          if ($scope.currEvent == idx) {
+            return;
+          }
+
+          $scope.prevEvent = $scope.currEvent;
           $scope.currEvent = idx;
         });
         $scope.bkgndImage = (function(url) {
