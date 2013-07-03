@@ -491,7 +491,14 @@ body.zh-cn #evttitles-container:before {
 
   <body class="zh-cn">
   <div id="screen" ng-controller="EventScreen" ng-class="events[currEvent].bgClass">
-    <section id="loginbox" ng-controller="SigninBox" data-drag="true" jqyoui-draggable data-jqyoui-options="nativeDragOptions">
+    <section id="loginbox"
+      ng-controller="SigninBox"
+      data-drag="true"
+      jqyoui-draggable
+      data-jqyoui-options="nativeDragOptions"
+      ng-mouseenter="cancelTimer()"
+      ng-mouseleave="newTimer()"
+      >
       <div id="loginbox-titlebar"></div>
       <div id="loginbox-content">
         <div id="loginbox-inner">
@@ -524,7 +531,13 @@ body.zh-cn #evttitles-container:before {
       <figcaption id="eventtitle">
       <div id="evttitles-container">
         <ul id="evttitles">
-          <li ng-repeat="evt in events" ng-class="{ 'evttitle': true, 'evttitle-active': $index == currEvent }" ng-bind-html="evt.desc"></li>
+          <li
+          ng-repeat="evt in events"
+          ng-class="{ 'evttitle': true, 'evttitle-active': $index == currEvent }"
+          ng-bind-html="evt.desc"
+          ng-mouseenter="cancelTimer()"
+          ng-mouseleave="newTimer()"
+          ></li>
         </ul>
       </div>
       </figcaption>

@@ -34,15 +34,13 @@ requirejs(
             $scope.events = EVENTS;
             $scope.prevEvent = $scope.currEvent = 1;
             $scope.switchToShot = (function(idx, resetTimer) {
-              if ($scope.currEvent == idx) {
+              if (idx == $scope.currEvent) {
                 return;
               }
 
-              $scope.prevEvent = $scope.currEvent;
               $scope.currEvent = idx;
-
-              resetTimer ? $timeout.cancel($scope.nextImageTimer) : 0;
-              $scope.nextImageTimer = $timeout($scope.nextShot, SWITCH_INTERVAL);
+              resetTimer ? $scope.cancelTimer() : 0;
+              $scope.newTimer();
             });
             $scope.bkgndImage = (function(url) {
               return {
@@ -54,7 +52,23 @@ requirejs(
 
               $scope.switchToShot(evt == EVENTS.length - 1 ? 0 : evt + 1, false);
             });
-            $scope.nextImageTimer = $timeout($scope.nextShot, SWITCH_INTERVAL);
+            $scope.newTimer = (function() {
+              $scope.nextImageTimer = $timeout($scope.nextShot, SWITCH_INTERVAL);
+            });
+            $scope.cancelTimer = (function() {
+              if ($scope.nextImageTimer === null) {
+                return;
+              }
+
+              $timeout.cancel($scope.nextImageTimer);
+              $scope.nextImageTimer = null;
+            });
+
+            $scope.$watch('currEvent', function(to, from) {
+              (to != from) ? $scope.prevEvent = from : 0;
+            });
+
+            $scope.newTimer();
 
             console.log($scope);
           });
