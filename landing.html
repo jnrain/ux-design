@@ -133,11 +133,11 @@ html, body {
   border: none;
   border-radius: 8px;
 
-  -webkit-transition: color, background-color 0.5s;
-  -moz-transition: color, background-color 0.5s;
-  -ms-transition: color, background-color 0.5s;
-  -o-transition: color, background-color 0.5s;
-  transition: color, background-color 0.5s;
+  -webkit-transition: color 0.25s, background-color 0.25s;
+  -moz-transition: color 0.25s, background-color 0.25s;
+  -ms-transition: color 0.25s, background-color 0.25s;
+  -o-transition: color 0.25s, background-color 0.25s;
+  transition: color 0.25s, background-color 0.25s;
 }
 
 #screen.bg-dark #signinform>input[type="text"],
@@ -252,23 +252,16 @@ html, body {
   visibility: visible;
   opacity: 1;
 
-  -webkit-transition: opacity 0.5s;
-  -moz-transition: opacity 0.5s;
-  -ms-transition: opacity 0.5s;
-  -o-transition: opacity 0.5s;
-  transition: opacity 0.5s;
+  -webkit-transition: opacity 1s;
+  -moz-transition: opacity 1s;
+  -ms-transition: opacity 1s;
+  -o-transition: opacity 1s;
+  transition: opacity 1s;
 }
 
 #eventshots>.shot-prev {
   visibility: visible;
   opacity: 1;
-  /*
-  -webkit-transition-delay: 0.5s;
-  -moz-transition-delay: 0.5s;
-  -ms-transition-delay: 0.5s;
-  -o-transition-delay: 0.5s;
-  transition-delay: 0.5s;
-  */
 }
 
 #eventtitle {
@@ -307,17 +300,46 @@ html, body {
 
 }
 
-#eventtitle:before {
-  display: inline-block;
-  margin: 0 0.4em 0 0;
+#evttitles-container:before {
+  float: left;
+  padding: 0 0.4em 0 0;
   opacity: 0.5;
+
+  -webkit-transition: color 1s, text-shadow 1s;
+  -moz-transition: color 1s, text-shadow 1s;
+  -ms-transition: color 1s, text-shadow 1s;
+  -o-transition: color 1s, text-shadow 1s;
+  transition: color 1s, text-shadow 1s;
 }
 
-body.zh-cn #eventtitle:before {
+body.zh-cn #evttitles-container:before {
   content: "进站图";
 }
 
-#eventtitle>a {
+#evttitles {
+  position: relative;
+  float: left;
+}
+
+.evttitle {
+  opacity: 0;
+  white-space: nowrap;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  -webkit-transition: opacity 1s;
+  -moz-transition: opacity 1s;
+  -ms-transition: opacity 1s;
+  -o-transition: opacity 1s;
+  transition: opacity 1s;
+}
+
+.evttitle-active {
+  opacity: 1;
+}
+
+.evttitle>a {
   /*border-bottom: 1px solid #fff;*/
   text-decoration: underline;
 }
@@ -405,11 +427,11 @@ body.zh-cn #eventtitle:before {
   right: 0;
   opacity: 0;
 
-  -webkit-transition: border-color, opacity 0.5s;
-  -moz-transition: border-color, opacity 0.5s;
-  -ms-transition: border-color, opacity 0.5s;
-  -o-transition: border-color, opacity 0.5s;
-  transition: border-color, opacity 0.5s;
+  -webkit-transition: border-color 0.25s, opacity 0.25s;
+  -moz-transition: border-color 0.25s, opacity 0.25s;
+  -ms-transition: border-color 0.25s, opacity 0.25s;
+  -o-transition: border-color 0.25s, opacity 0.25s;
+  transition: border-color 0.25s, opacity 0.25s;
 }
 
 .eventlist-indicator>.indicator-active {
@@ -498,7 +520,15 @@ body.zh-cn #eventtitle:before {
         <div ng-style="bkgndImage(events[prevEvent].href)" class="shot shot-prev"></div>
         <div ng-repeat="evt in events" ng-style="bkgndImage(evt.href)" ng-class="{ 'shot': true, 'shot-active': $index == currEvent }"></div>
       </div>
-      <figcaption id="eventtitle" ng-bind-html="events[currEvent].desc"></figcaption>
+
+      <figcaption id="eventtitle">
+      <div id="evttitles-container">
+        <ul id="evttitles">
+          <li ng-repeat="evt in events" ng-class="{ 'evttitle': true, 'evttitle-active': $index == currEvent }" ng-bind-html="evt.desc"></li>
+        </ul>
+      </div>
+      </figcaption>
+
       <div id="eventlist-container" class="vertmiddle-outer">
         <ul id="eventlist" class="eventlist-list">
           <li ng-repeat="evt in events" ng-style="bkgndImage(evt.thumbHref)" ng-class="{ 'shot-active': $index == currEvent }" ng-click="switchToShot($index)"></li>
