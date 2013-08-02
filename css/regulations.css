@@ -1,0 +1,118 @@
+body {
+  color: #1f1f1f;
+  background-color: #f8fcf3;
+}
+
+article {
+  width: 80%;
+  margin: 2em auto;
+
+  font-family: "Junction", "WenQuanYi Micro Hei Light", "WenQuanYi Micro Hei", "Microsoft YaHei", sans-serif;
+  font-size: 16px;
+  font-weight: 100;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+dt {
+  font-family: "Junction", "WenQuanYi Micro Hei", "Microsoft YaHei", sans-serif;
+  color: #669a1f;
+  position: relative;
+}
+
+h1:before,
+h2:before,
+h3:before,
+h4:before,
+h5:before,
+h6:before {
+  content: "-";
+  display: inline-block;
+  position: absolute;
+  left: -0.75em;
+  bottom: 0px;
+}
+
+h1,
+h2 {
+  font-weight: bold;
+  border-bottom: 1px solid rgba(102, 154, 31, 0.5);
+}
+
+h1 {
+  font-size: 200%;
+  margin: 0 0 1em;
+}
+
+h2 {
+  font-size: 175%;
+  margin: 1.5em 0 0.75em;
+}
+
+h3 {
+  font-size: 150%;
+  margin: 1em 0 0.5em;
+}
+
+h4, h5, h6 {
+  font-size: 125%;
+}
+
+p,
+li {
+  margin: 0 0 1em;
+
+  line-height: 1.5;
+}
+
+a {
+  color: #3a8fc9;
+}
+
+ol {
+  list-style: decimal;
+}
+
+li>ol,
+li>ul,
+li>dl {
+  margin: 0.5em 0 0.5em 2em;
+}
+
+dt {
+  display: inline-block;
+  font-weight: bold;
+  margin: 0 0.5em 0 0;
+}
+
+dt:before {
+  content: "*";
+  font-weight: normal;
+  position: absolute;
+  left: -1em;
+  bottom: 0;
+}
+
+dd {
+  display: inline;
+}
+
+dd:after {
+  content: ".";
+  display: block;
+  clear: both;
+  font-size: 0;
+  line-height: 0;
+}
+
+img {
+  display: block;
+  margin: 2em auto;
+}
+
+
+/* vim:set ai et ts=2 sw=2 sts=2 fenc=utf-8: */
