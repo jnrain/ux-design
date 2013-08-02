@@ -78,6 +78,9 @@ html, body {
 /* 大区 */
 #content {
   height: 100%;
+
+  /* 让滚动条出现在这里, 而不是 window */
+  overflow: auto;
 }
 
 #areas {
@@ -174,20 +177,28 @@ html, body {
 }
 
 #topnav {
+  position: relative;
+  top: 0;
+
   width: 100%;
   height: 48px;
 
   background: none repeat scroll 0 0 rgba(0, 0, 0, 0.75);
   opacity: 0.25;
 
-  -webkit-transition: opacity 0.15s;
-  -moz-transition: opacity 0.15s;
-  -ms-transition: opacity 0.15s;
-  -o-transition: opacity 0.15s;
-  transition: opacity 0.15s;
+  -webkit-transition: opacity 0.15s, top 0.15s;
+  -moz-transition: opacity 0.15s, top 0.15s;
+  -ms-transition: opacity 0.15s, top 0.15s;
+  -o-transition: opacity 0.15s, top 0.15s;
+  transition: opacity 0.15s, top 0.15s;
+}
+
+#topnav.hidden {
+  top: -42px;
 }
 
 #topnav:hover {
+  top: 0;
   opacity: 1;
 }
 
@@ -229,9 +240,9 @@ html, body {
 
     </style>
 
-    <!-- framework js
+    <!-- framework js -->
     <script src="//static.jnrain.com/common/js/config.js"></script>
-    <script src="//static.jnrain.com/common/js/require.js"></script> -->
+    <script src="//static.jnrain.com/common/js/require.js"></script>
 
     <!-- [if lt IE 9]
       just ignore them for the moment
@@ -239,11 +250,11 @@ html, body {
   </head>
 
   <body class="zh-cn">
-  <div id="screen">
-    <section id="content">
+  <div id="screen" ng-controller="MainPage">
+    <section id="content" ng-scroll-event="updateScroll($event, isEndEvent);">
       <ul id="areas" class="posts">
         <li class="area post">.abcdefghijklmnopqrstuvwxyz</li>
-        <li class="area post">.abcdefghijklmnopqrstuvwxyz</li>
+        <li class="area post">.abcdefghijklmnopqrstuvwxyz<br />{{status}}</li>
         <li class="area post">.abcdefghijklmnopqrstuvwxyz</li>
         <li class="area post">.abcdefghijklmnopqrstuvwxyz</li>
         <li class="area post">.abcdefghijklmnopqrstuvwxyz</li>
@@ -268,35 +279,37 @@ html, body {
       </nav>
     </section>
     <section id="topnavbox">
-      <nav id="topnav">
+      <nav id="topnav" ng-class="{ 'hidden': topNavHidden }">
         <ul id="areanav" class="navclass-top clear">
           <li class="areanavitem navitem">
-          <a href="" class="areanavlink navlink">区域1</a>
+          <a href="#" class="areanavlink navlink">区域1</a>
           </li>
           <li class="areanavitem navitem">
-          <a href="" class="areanavlink navlink">区域2</a>
+          <a href="#" class="areanavlink navlink">区域2</a>
           </li>
           <li class="areanavitem navitem">
-          <a href="" class="areanavlink navlink">区域3</a>
+          <a href="#" class="areanavlink navlink">区域3</a>
           </li>
           <li class="areanavitem navitem">
-          <a href="" class="areanavlink navlink">区域4</a>
+          <a href="#" class="areanavlink navlink">区域4</a>
           </li>
         </ul>
         <ul id="sitenav" class="navclass-top navclass-alignright clear">
           <li class="sitenavitem navitem">
-          <a href="" class="sitenavlink navlink">BT站</a>
+          <a href="#" class="sitenavlink navlink">BT站</a>
           </li>
           <li class="sitenavitem navitem">
-          <a href="" class="sitenavlink navlink">日记站</a>
+          <a href="#" class="sitenavlink navlink">日记站</a>
           </li>
           <li class="sitenavitem navitem">
-          <a href="" class="sitenavlink navlink">运行状态</a>
+          <a href="#" class="sitenavlink navlink">运行状态</a>
           </li>
         </ul>
       </nav>
     </section>
   </div>
+
+  <script src="js/main.js"></script>
   </body>
 <!-- vim:set ai et ts=2 sw=2 sts=2 fenc=utf-8: -->
 </html>
