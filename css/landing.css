@@ -1,0 +1,468 @@
+html {
+  font-family: "Junction", "WenQuanYi Micro Hei", "Microsoft YaHei", sans-serif;
+  font-weight: 100;
+}
+
+body {
+  background-color: #c2f090;
+}
+
+html, body {
+  height: 100%;
+}
+
+#screen {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+#loginbox {
+  position: absolute;
+  left: 6%;
+  top: 10%;
+
+  width: 20%;
+  min-width: 260px;  /* 给 #loginbox-inner 至少 240px 宽度 */
+
+  border-radius: 16px;
+  z-index: 1000;
+}
+
+#loginbox-titlebar {
+  width: 100%;
+  height: 20px;
+  border-radius: 16px 16px 0 0;
+  cursor: move;
+}
+
+#loginbox-content {
+  width: 100%;
+  min-height: 240px;  /* 260 - 20 */
+  border-radius: 0 0 16px 16px;
+}
+
+#loginbox-inner {
+  /* 8 * sqrt(2) / 2 = ~5.6, padding 如果有的话不要少于这个 */
+  padding: 0 10px 10px 10px;
+}
+
+#screen.bg-dark #loginbox>#loginbox-titlebar {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+#screen.bg-dark #loginbox>#loginbox-content {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+#screen.bg-dark #loginbox:hover>#loginbox-titlebar {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+#screen.bg-dark #loginbox:hover>#loginbox-content {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+#screen.bg-light #loginbox>#loginbox-titlebar {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+#screen.bg-light #loginbox>#loginbox-content {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+#screen.bg-light #loginbox:hover>#loginbox-titlebar {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+#screen.bg-light #loginbox:hover>#loginbox-content {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+#logintitle {
+  padding: 0.5em 0 0;
+
+  font-size: 150%;
+  font-weight: normal;
+}
+
+#screen.bg-dark #logintitle {
+  color: #fff;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.75);
+}
+
+#screen.bg-light #logintitle {
+  /*
+  color: #333;
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.75);
+  */
+  color: #ddd;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.75);
+}
+
+#logintitle:after {
+  content: "\bb";
+
+  display: inline-block;
+  margin: 0 0 0 0.4em;
+}
+
+#signinform>input[type="text"],
+#signinform>input[type="password"] {
+  font-size: 125%;
+  font-family: "Source Code Pro", "DejaVu Sans Mono", "Consolas", "Courier New", monospace;
+  margin: 0.5em 0 0 0;
+
+  width: 100%;
+
+  border: none;
+  border-radius: 8px;
+
+  -webkit-transition: color 0.25s, background-color 0.25s;
+  -moz-transition: color 0.25s, background-color 0.25s;
+  -ms-transition: color 0.25s, background-color 0.25s;
+  -o-transition: color 0.25s, background-color 0.25s;
+  transition: color 0.25s, background-color 0.25s;
+}
+
+#screen.bg-dark #signinform>input[type="text"],
+#screen.bg-dark #signinform>input[type="password"] {
+  color: #000;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+#screen.bg-dark #signinform>input[type="text"]::placeholder,
+#screen.bg-dark #signinform>input[type="password"]::placeholder {
+  color: #000;
+  opacity: 0.375;
+}
+
+#screen.bg-dark #signinform>input[type="text"]:-moz-placeholder,
+#screen.bg-dark #signinform>input[type="password"]:-moz-placeholder {
+  color: #000;
+  opacity: 0.375;
+}
+
+#screen.bg-dark #signinform>input[type="text"]::-moz-placeholder,
+#screen.bg-dark #signinform>input[type="password"]::-moz-placeholder {
+  color: #000;
+  opacity: 0.375;
+}
+
+#screen.bg-dark #signinform>input[type="text"]::-webkit-input-placeholder,
+#screen.bg-dark #signinform>input[type="password"]::-webkit-input-placeholder {
+  color: #000;
+  opacity: 0.375;
+}
+
+#screen.bg-dark #signinform>input[type="text"]::-ms-input-placeholder,
+#screen.bg-dark #signinform>input[type="password"]::-ms-input-placeholder {
+  color: #000;
+  opacity: 0.375;
+}
+
+#screen.bg-dark #signinform>input[type="text"]:focus,
+#screen.bg-dark #signinform>input[type="password"]:focus {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+#screen.bg-light #signinform>input[type="text"],
+#screen.bg-light #signinform>input[type="password"] {
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+#screen.bg-light #signinform>input[type="text"]::placeholder,
+#screen.bg-light #signinform>input[type="password"]::placeholder {
+  color: #fff;
+  opacity: 0.4;
+}
+
+#screen.bg-light #signinform>input[type="text"]:-moz-placeholder,
+#screen.bg-light #signinform>input[type="password"]:-moz-placeholder {
+  color: #fff;
+  opacity: 0.4;
+}
+
+#screen.bg-light #signinform>input[type="text"]::-moz-placeholder,
+#screen.bg-light #signinform>input[type="password"]::-moz-placeholder {
+  color: #fff;
+  opacity: 0.4;
+}
+
+#screen.bg-light #signinform>input[type="text"]::-webkit-input-placeholder,
+#screen.bg-light #signinform>input[type="password"]::-webkit-input-placeholder {
+  color: #fff;
+  opacity: 0.4;
+}
+
+#screen.bg-light #signinform>input[type="text"]::-ms-input-placeholder,
+#screen.bg-light #signinform>input[type="password"]::-ms-input-placeholder {
+  color: #fff;
+  opacity: 0.4;
+}
+
+#screen.bg-light #signinform>input[type="text"]:focus,
+#screen.bg-light #signinform>input[type="password"]:focus {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+#eventshots {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  z-index: 1;
+}
+
+#eventshots>.shot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  visibility: hidden;
+  opacity: 0;
+  z-index: 2;
+}
+
+#eventshots>.shot-active {
+  visibility: visible;
+  opacity: 1;
+
+  -webkit-transition: opacity 1s;
+  -moz-transition: opacity 1s;
+  -ms-transition: opacity 1s;
+  -o-transition: opacity 1s;
+  transition: opacity 1s;
+}
+
+#eventshots>.shot-prev {
+  visibility: visible;
+  opacity: 1;
+}
+
+#eventtitle {
+  position: absolute;
+  bottom: 10%;
+  left: 5%;
+  width: 85%;
+
+  font-size: 200%;
+/*
+  border-radius: 16px;
+  padding: 5px 5px 0 5px;  /* 8 * sqrt(2) / 2 */
+  z-index: 5;
+}
+
+#screen.bg-dark #eventtitle {
+  color: #eee;
+  text-shadow: 1px 0 2px #000,
+      0 1px 2px #000,
+      0 -1px 2px #000,
+      -1px 0 2px #000;
+/*
+  background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);*/
+}
+
+#screen.bg-light #eventtitle {
+  color: #111;
+  text-shadow: 1px 0 2px #fff,
+      0 1px 2px #fff,
+      0 -1px 2px #fff,
+      -1px 0 2px #fff;
+/*
+  background-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);*/
+
+}
+
+#evttitles-container:before {
+  float: left;
+  padding: 0 0.4em 0 0;
+  opacity: 0.5;
+
+  -webkit-transition: color 1s, text-shadow 1s;
+  -moz-transition: color 1s, text-shadow 1s;
+  -ms-transition: color 1s, text-shadow 1s;
+  -o-transition: color 1s, text-shadow 1s;
+  transition: color 1s, text-shadow 1s;
+}
+
+body.zh-cn #evttitles-container:before {
+  content: "进站图";
+}
+
+#evttitles {
+  position: relative;
+  float: left;
+}
+
+.evttitle {
+  opacity: 0;
+  white-space: nowrap;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  -webkit-transition: opacity 1s;
+  -moz-transition: opacity 1s;
+  -ms-transition: opacity 1s;
+  -o-transition: opacity 1s;
+  transition: opacity 1s;
+}
+
+.evttitle-active {
+  opacity: 1;
+}
+
+.evttitle>a {
+  /*border-bottom: 1px solid #fff;*/
+  text-decoration: underline;
+}
+
+.vertmiddle-outer {
+  /*
+   * 垂直居中
+   * http://www.jakpsatweb.cz/css/css-vertical-center-solution.html
+   * 这里是无视 oldIE 的版本
+   */
+  display: table;
+
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+}
+
+#eventlist-container {
+  width: 100px;  /* 100px + 8px * 2 */
+  padding: 0 8px;
+  z-index: 5;
+}
+
+.eventlist-list {
+  /* 垂直居中 trick 的另一部分 */
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.eventlist-list>li {
+  height: 100px;
+  margin: 0 0 8px;
+
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.eventlist-list>li:last-child {
+  margin: 0;
+}
+
+#eventlist>li {
+  /* 缩略图宽度，这个和小三角的宽度当然是不一样的 */
+  width: 100px;
+
+  /* 缩略图的透明度 */
+  opacity: 0.5;
+}
+
+#eventlist>li:hover,
+#eventlist>li.shot-active {
+  /* 还是透明度 */
+  opacity: 1;
+}
+
+#eventlist-indicators-container {
+  top: 0;
+  right: 116px;  /* 100px 的 #eventlist-container + 8px 的 margin * 2 */
+  width: 18px;
+  height: 100%;
+  z-index: 6;
+}
+
+/* 指示当前显示进站的小三角 */
+.eventlist-indicator {
+  position: relative;
+}
+
+.eventlist-indicator>.indicator {
+  /*
+   * CSS 三角形，看这里
+   * http://css-tricks.com/snippets/css/css-triangle/
+   * http://apps.eky.hk/css-triangle-generator/
+   */
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10px 0 10px 17.3px;
+  border-color: transparent;
+
+  /* 定位到相应元素的中间 */
+  position: absolute;
+  top: 40px;  /* (100 - 20) / 2 */
+  right: 0;
+  opacity: 0;
+
+  -webkit-transition: border-color 0.25s, opacity 0.25s;
+  -moz-transition: border-color 0.25s, opacity 0.25s;
+  -ms-transition: border-color 0.25s, opacity 0.25s;
+  -o-transition: border-color 0.25s, opacity 0.25s;
+  transition: border-color 0.25s, opacity 0.25s;
+}
+
+.eventlist-indicator>.indicator-active {
+  opacity: 1;
+}
+
+#screen.bg-dark #eventlist-container {
+  /* IE6-8 filter removed */
+  /* IE9 SVG, needs conditional override of 'filter' to 'none'
+   * Disabled for the prototype
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIwIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjElIiBzdG9wLWNvbG9yPSIjZmZmZmZmIiBzdG9wLW9wYWNpdHk9IjAiLz4KICAgIDxzdG9wIG9mZnNldD0iMjAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIiBzdG9wLW9wYWNpdHk9IjAuMiIvPgogICAgPHN0b3Agb2Zmc2V0PSI4MCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMC4yIi8+CiAgICA8c3RvcCBvZmZzZXQ9Ijk5JSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIwIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMCIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+  */
+  background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 1%, rgba(255,255,255,0.2) 20%, rgba(255,255,255,0.2) 80%, rgba(255,255,255,0) 99%, rgba(255,255,255,0) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(1%,rgba(255,255,255,0)), color-stop(20%,rgba(255,255,255,0.2)), color-stop(80%,rgba(255,255,255,0.2)), color-stop(99%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,0) 1%,rgba(255,255,255,0.2) 20%,rgba(255,255,255,0.2) 80%,rgba(255,255,255,0) 99%,rgba(255,255,255,0) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,0) 1%,rgba(255,255,255,0.2) 20%,rgba(255,255,255,0.2) 80%,rgba(255,255,255,0) 99%,rgba(255,255,255,0) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,0) 1%,rgba(255,255,255,0.2) 20%,rgba(255,255,255,0.2) 80%,rgba(255,255,255,0) 99%,rgba(255,255,255,0) 100%); /* IE10+ */
+  background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,0) 1%,rgba(255,255,255,0.2) 20%,rgba(255,255,255,0.2) 80%,rgba(255,255,255,0) 99%,rgba(255,255,255,0) 100%); /* W3C */
+}
+
+#screen.bg-light #eventlist-container {
+  /* IE9 SVG, needs conditional override of 'filter' to 'none' *
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjElIiBzdG9wLWNvbG9yPSIjMDAwMDAwIiBzdG9wLW9wYWNpdHk9IjAiLz4KICAgIDxzdG9wIG9mZnNldD0iMjAlIiBzdG9wLWNvbG9yPSIjMDAwMDAwIiBzdG9wLW9wYWNpdHk9IjAuMiIvPgogICAgPHN0b3Agb2Zmc2V0PSI4MCUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMC4yIi8+CiAgICA8c3RvcCBvZmZzZXQ9Ijk5JSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMCIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);*/
+  background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 1%, rgba(0,0,0,0.2) 20%, rgba(0,0,0,0.2) 80%, rgba(0,0,0,0) 99%, rgba(0,0,0,0) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(1%,rgba(0,0,0,0)), color-stop(20%,rgba(0,0,0,0.2)), color-stop(80%,rgba(0,0,0,0.2)), color-stop(99%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 1%,rgba(0,0,0,0.2) 20%,rgba(0,0,0,0.2) 80%,rgba(0,0,0,0) 99%,rgba(0,0,0,0) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 1%,rgba(0,0,0,0.2) 20%,rgba(0,0,0,0.2) 80%,rgba(0,0,0,0) 99%,rgba(0,0,0,0) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 1%,rgba(0,0,0,0.2) 20%,rgba(0,0,0,0.2) 80%,rgba(0,0,0,0) 99%,rgba(0,0,0,0) 100%); /* IE10+ */
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 1%,rgba(0,0,0,0.2) 20%,rgba(0,0,0,0.2) 80%,rgba(0,0,0,0) 99%,rgba(0,0,0,0) 100%); /* W3C */
+}
+
+#screen.bg-dark #eventlist>li {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+#screen.bg-light #eventlist>li {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+#screen.bg-dark .eventlist-indicator>.indicator {
+  border-left-color: rgba(255, 255, 255, 0.75);
+}
+
+#screen.bg-light .eventlist-indicator>.indicator {
+  border-left-color: rgba(0, 0, 0, 0.75);
+}
+
+
+/* vim:set ai et ts=2 sw=2 sts=2 fenc=utf-8: */

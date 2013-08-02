@@ -1,0 +1,225 @@
+html {
+  font-family: "WenQuanYi Micro Hei", "Microsoft YaHei", sans-serif;
+  font-weight: 100;
+}
+
+body {
+  background-color: #f8fcf3;
+}
+
+html, body {
+  height: 100%;
+}
+
+#screen {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.vertmiddle-outer {
+  /*
+   * 垂直居中
+   * http://www.jakpsatweb.cz/css/css-vertical-center-solution.html
+   * 这里是无视 oldIE 的版本
+   */
+  display: table;
+
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+}
+
+.vertmiddle-inner {
+  /* 垂直居中 trick 的另一部分 */
+  display: table-cell;
+  vertical-align: middle;
+}
+
+
+/* 头像 */
+.avatar-big {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+
+/* 头像菜单 */
+#person {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+
+  padding: 10px;
+
+  background-color: #ccc;
+  border-radius: 0 0 10px 0;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+
+/* 大区 */
+#content {
+  height: 100%;
+
+  /* 让滚动条出现在这里, 而不是 window */
+  overflow: auto;
+}
+
+#areas {
+  height: 100%;
+}
+
+#areas > .area {
+  min-height: 100%;
+  text-align: center;
+}
+
+
+/* 左侧标签面板 */
+#tabpanebox {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 140px 0 0 0;
+  width: 0;
+  height: 100%;
+}
+
+#tabpane {
+  position: relative;
+  left: -120px;
+  top: 0;
+  width: 130px;
+  height: 100%;
+  z-index: 1500;
+
+  transition: left 0.15s;
+}
+
+#tabpane:hover {
+  left: 0;
+}
+
+#tabpane > .tablist {
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+#tabpane > .tablist > .tabwnd {
+  padding: 0 10px 0 0;
+  min-height: 3em;
+  background-color: rgba(0, 0, 0, 0.505);
+}
+
+#tabpane > .tablist > .tabwnd:hover {
+  background-color: rgba(255, 255, 255, 0.75);
+}
+
+/* 顶部导航公共 */
+.navclass-top {
+  float: left;
+  height: 100%;
+}
+
+.navclass-alignright {
+  float: right;
+}
+
+.navclass-top > .navitem {
+  float: left;
+  display: table;
+  height: 100%;
+}
+
+.navclass-top > .navitem > .navlink {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+
+/* 顶部导航 */
+#topnavbox {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1500;
+
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+#topnav {
+  position: relative;
+  top: 0;
+
+  width: 100%;
+  height: 48px;
+
+  background: none repeat scroll 0 0 rgba(0, 0, 0, 0.75);
+  opacity: 0.25;
+
+  -webkit-transition: opacity 0.15s, top 0.15s;
+  -moz-transition: opacity 0.15s, top 0.15s;
+  -ms-transition: opacity 0.15s, top 0.15s;
+  -o-transition: opacity 0.15s, top 0.15s;
+  transition: opacity 0.15s, top 0.15s;
+}
+
+#topnav.hidden {
+  top: -42px;
+}
+
+#topnav:hover {
+  top: 0;
+  opacity: 1;
+}
+
+
+/* 自适应设计 */
+@media (min-width: 768px) {
+  .avatar-big {
+    width: 120px;
+    height: 120px;
+  }
+
+  #topnavbox {
+    padding: 0 0 0 140px;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 767px) {
+  .avatar-big {
+    width: 90px;
+    height: 90px;
+  }
+
+  #topnavbox {
+    padding: 0 0 0 110px;
+  }
+}
+
+@media (max-width: 599px) {
+  .avatar-big {
+    width: 60px;
+    height: 60px;
+  }
+
+  #topnavbox {
+    padding: 0 0 0 80px;
+  }
+}
+
+
+/* vim:set ai et ts=2 sw=2 sts=2 fenc=utf-8: */
