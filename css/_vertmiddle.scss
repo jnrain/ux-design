@@ -1,0 +1,17 @@
+@mixin vertmiddle-outer {
+  /*
+   * 垂直居中
+   * http://www.jakpsatweb.cz/css/css-vertical-center-solution.html
+   * 这里是无视 oldIE 的版本
+   */
+  display: table;
+}
+
+@mixin vertmiddle-inner {
+  /* 垂直居中 trick 的另一部分 */
+  display: table-cell;
+  vertical-align: middle;
+}
+
+
+// vim:set ai et ts=2 sw=2 sts=2 fenc=utf-8:
