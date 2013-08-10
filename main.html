@@ -26,21 +26,19 @@
   <body class="zh-cn">
   <div id="screen" ng-controller="MainPage">
     <section id="content" ng-scroll-event="updateScroll($event, isEndEvent);">
+      <section id="noticebox">
+      </section>
       <ul id="areas" class="posts">
-        <li class="area post">.abcdefghijklmnopqrstuvwxyz</li>
-        <li class="area post">.abcdefghijklmnopqrstuvwxyz<br />{{status}}</li>
-        <li class="area post">.abcdefghijklmnopqrstuvwxyz</li>
-        <li class="area post">.abcdefghijklmnopqrstuvwxyz</li>
-        <li class="area post">.abcdefghijklmnopqrstuvwxyz</li>
-        <li class="area post">.abcdefghijklmnopqrstuvwxyz</li>
-        <li class="area post">.abcdefghijklmnopqrstuvwxyz</li>
-        <li class="area post">.abcdefghijklmnopqrstuvwxyz</li>
-        <li class="area post">.abcdefghijklmnopqrstuvwxyz</li>
-        <li class="area post">.abcdefghijklmnopqrstuvwxyz</li>
+        <li class="area post" ng-repeat="area in areas" ui-jq="waypoint" ui-options="updateActiveAreaFactory($index)">
+        <a name="area-{{$index}}"></a>
+        {{$index}}.abcdefghijklmnopqrstuvwxyz
+        </li>
       </ul>
     </section>
     <section id="person">
       <div class="avatar-big">
+      </div>
+      <div class="info">
       </div>
     </section>
     <section id="tabpanebox">
@@ -55,17 +53,8 @@
     <section id="topnavbox">
       <nav id="topnav" ng-class="{ 'hidden': topNavHidden }">
         <ul id="areanav" class="navclass-top clear">
-          <li class="areanavitem navitem">
-          <a href="#" class="areanavlink navlink">区域1</a>
-          </li>
-          <li class="areanavitem navitem">
-          <a href="#" class="areanavlink navlink">区域2</a>
-          </li>
-          <li class="areanavitem navitem">
-          <a href="#" class="areanavlink navlink">区域3</a>
-          </li>
-          <li class="areanavitem navitem">
-          <a href="#" class="areanavlink navlink">区域4</a>
+          <li class="areanavitem navitem" ng-repeat="area in areas" ng-class="{ 'navitem-active': $index == activeArea }">
+          <a href="#area-{{$index}}" class="areanavlink navlink">区域{{$index}}</a>
           </li>
         </ul>
         <ul id="sitenav" class="navclass-top navclass-alignright clear">

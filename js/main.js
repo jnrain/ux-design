@@ -2,12 +2,24 @@
 
 
 requirejs(
-    ['angular', 'angular-scrollevents'],
+    ['angular', 'angular-scrollevents', 'waypoints', 'ui.jq'],
     function(angular) {
-      var mod = angular.module('jnrain2-main', ['ngScrollEvent']),
+      var mod = angular.module('jnrain2-main', ['ngScrollEvent', 'ui.jq']),
           MainPage = (function($scope) {
-            $scope.status = 'nothing';
+            $scope.areas = [1, 2, 3, 4];
+            $scope.activeArea = 0;
             $scope.topNavHidden = false;
+
+            $scope.updateActiveAreaFactory = (function(idx) {
+              console.log('updateActiveAreaFactory: ' + idx);
+
+              // 返回的是一个 handler
+              return (function() {
+                console.log('updateActiveArea: ' + idx);
+                alert('scrolled');
+                $scope.activeArea = idx;
+              });
+            });
 
             $scope.updateScroll = (function() {
               var prevTop = 0;
@@ -26,8 +38,6 @@ requirejs(
                 // 在不能响应所有 scroll 事件的性能考虑下至少也做成这样
                 // 基本上还是可以接受的
                 $scope.topNavHidden = (top > prevTop);
-
-                $scope.status = 'x=' + left + ', y=' + top + ', end=' + isEndEvent;
 
                 prevTop = top;
               });
