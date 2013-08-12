@@ -216,6 +216,10 @@ html, body {
   box-sizing: border-box;
   width: 100%;
 
+  @media (min-width: 768px) {
+    padding: 0 0 0 140px;
+  }
+
   @media (min-width: 600px) and (max-width: 767px) {
     padding: 0 0 0 110px;
   }
@@ -228,19 +232,8 @@ html, body {
 #topnav {
   background: none repeat scroll 0 0 rgba(0, 0, 0, 0.75);
   opacity: 0.25;
-}
 
-
-/* 自适应设计 */
-@media (min-width: 768px) {
-  #person {
-  }
-
-  #topnavbox {
-    padding: 0 0 0 140px;
-  }
-
-  #topnav {
+  @media (min-width: 768px) {
     position: relative;
     top: 0;
 
@@ -252,28 +245,30 @@ html, body {
     -ms-transition: opacity 0.15s, top 0.15s;
     -o-transition: opacity 0.15s, top 0.15s;
     transition: opacity 0.15s, top 0.15s;
-  }
 
-  #topnav.hidden {
-    top: -42px;
-  }
+    &:hover {
+      top: 0;
+      opacity: 1;
+    }
 
-  #topnav:hover {
-    top: 0;
-    opacity: 1;
-  }
+    &.hidden {
+      top: -42px;
 
-  /* 让当前活跃的大区标题在顶部导航隐藏的时候拉下来 */
-  #topnav.hidden .navitem-active {
-    top: 42px;
-    background-color: rgba(0, 0, 0, 0.5);
-    transition: top 0.75s ease 0.5s;
-  }
+      /* 让当前活跃的大区标题在顶部导航隐藏的时候拉下来 */
+      .navitem-active {
+        top: 42px;
+        background-color: rgba(0, 0, 0, 0.5);
+        transition: top 0.75s ease 0.5s;
+      }
 
-  #topnav.hidden:hover .navitem-active {
-    top: 0px;
-    background-color: transparent;
-    transition: none;
+      &:hover {
+        .navitem-active {
+          top: 0px;
+          background-color: transparent;
+          transition: none;
+        }
+      }
+    }
   }
 }
 
