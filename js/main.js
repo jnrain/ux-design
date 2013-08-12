@@ -6,7 +6,26 @@ requirejs(
     function(angular) {
       var mod = angular.module('jnrain2-main', ['ngScrollEvent']),
           MainPage = (function($scope) {
-            $scope.areas = [1, 2, 3, 4];
+            $scope.areas = [
+              {
+                name: '广场'
+              },
+              {
+                name: '文艺'
+              },
+              {
+                name: '技术'
+              },
+              {
+                name: 'ACG'
+              },
+              {
+                name: '游戏'
+              },
+              {
+                name: '体育'
+              }
+            ];
             $scope.activeArea = 0;
             $scope.topNavHidden = false;
 

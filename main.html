@@ -54,7 +54,7 @@
       <nav id="topnav" ng-class="{ 'hidden': topNavHidden }">
         <ul id="areanav" class="navclass-top clear">
           <li class="areanavitem navitem" ng-repeat="area in areas" ng-class="{ 'navitem-active': $index == activeArea }">
-          <a href="#area-{{$index}}" class="areanavlink navlink">区域{{$index}}</a>
+          <a href="#area-{{$index}}" class="areanavlink navlink">{{area.name}}</a>
           </li>
         </ul>
         <ul id="sitenav" class="navclass-top navclass-alignright clear">

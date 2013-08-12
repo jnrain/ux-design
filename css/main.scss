@@ -172,7 +172,7 @@ html, body {
     height: 100%;
     color: #fff;
 
-    padding: 0 0.5em;
+    padding: 0 0.75em;
     border-bottom: 0px solid;
 
     transition: border-bottom-width 0.1s;
@@ -192,6 +192,8 @@ html, body {
   }
 
   > .navitem-active {
+    font-weight: bold;
+
     border: {
       bottom: {
         width: 6px;
@@ -271,10 +273,16 @@ html, body {
       }
 
       &:hover {
+        top: 0;
+
+        .navitem {
+          /* 不得已重复了一遍 border-bottom-width 的效果... */
+          transition: top 0s, border-bottom-width 0.1s;
+        }
+
         .navitem-active {
           top: 0px;
           background-color: transparent;
-          transition: none;
         }
       }
     }
