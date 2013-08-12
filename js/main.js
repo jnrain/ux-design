@@ -29,11 +29,6 @@ requirejs(
               },
               {
                 name: 'ACG',
-                bgcolor: '#ffe8f1',
-                navcolor: '#ff0066'
-              },
-              {
-                name: '游戏',
                 bgcolor: '#dddddd',
                 navcolor: '#000000'
               },
