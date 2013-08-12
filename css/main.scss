@@ -90,18 +90,17 @@ html, body {
 }
 
 
-/* 顶部通知 */
-#noticebox {
-  height: 240px;
-}
-
-
 /* 大区 */
 #content {
   height: 100%;
 
   /* 让滚动条出现在这里, 而不是 window */
   overflow: auto;
+}
+
+// 全局通知栏
+#noticebox {
+  height: 240px;
 }
 
 #areas {
@@ -142,7 +141,8 @@ html, body {
         bottom: {
           width: 6px;
           // color 每个大区不同, 用脚本设置的
-          // 这里就不写了
+          // 这里是没有明确指定颜色情况下采用的默认值
+          color: #666;
         }
       }
     }
@@ -159,6 +159,7 @@ html, body {
       bottom: {
         width: 6px;
         // 关于 color 的说明同上
+        color: #666;
       }
     }
   }
@@ -242,7 +243,7 @@ html, body {
       .navitem-active {
         top: 42px;
         background-color: rgba(0, 0, 0, 0.5);
-        transition: top 0.75s ease 0.5s;
+        transition: top 0.75s ease 0.15s;
       }
 
       &:hover {
@@ -255,7 +256,8 @@ html, body {
 
         .navitem-active {
           top: 0px;
-          background-color: transparent;
+          background-color: rgba(0, 0, 0, 0);
+          transition: top 0.15s 0s, background-color 0.5s 0.15s;
         }
       }
     }
