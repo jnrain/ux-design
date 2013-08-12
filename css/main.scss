@@ -192,6 +192,8 @@ html, body {
   }
 
   > .navitem-active {
+    font-weight: bold;
+
     border: {
       bottom: {
         width: 6px;
