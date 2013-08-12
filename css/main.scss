@@ -191,11 +191,11 @@ html, body {
     }
   }
 
-  .navitem-active {
+  > .navitem-active {
     border: {
       bottom: {
         width: 6px;
-        color: #000;
+        color: #000 !important;
       }
     }
   }
