@@ -113,52 +113,6 @@ html, body {
 }
 
 
-/* 左侧标签面板 */
-#tabpanebox {
-  position: fixed;
-  top: 0;
-  left: 0;
-
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  -o-box-sizing: border-box;
-  box-sizing: border-box;
-  padding: 140px 0 0 0;
-  width: 0;
-  height: 100%;
-}
-
-#tabpane {
-  position: relative;
-  left: -120px;
-  top: 0;
-  width: 130px;
-  height: 100%;
-  z-index: 1500;
-
-  transition: left 0.15s;
-
-  &:hover {
-    left: 0;
-  }
-
-  > .tablist {
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-
-    > .tabwnd {
-      padding: 0 10px 0 0;
-      min-height: 3em;
-      background-color: rgba(0, 0, 0, 0.505);
-
-      &:hover {
-        background-color: rgba(255, 255, 255, 0.75);
-      }
-    }
-  }
-}
-
 /* 顶部导航公共 */
 .navclass-top {
   float: left;
