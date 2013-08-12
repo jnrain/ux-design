@@ -271,10 +271,16 @@ html, body {
       }
 
       &:hover {
+        top: 0;
+
+        .navitem {
+          /* 不得已重复了一遍 border-bottom-width 的效果... */
+          transition: top 0s, border-bottom-width 0.1s;
+        }
+
         .navitem-active {
           top: 0px;
           background-color: transparent;
-          transition: none;
         }
       }
     }
