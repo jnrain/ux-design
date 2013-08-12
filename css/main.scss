@@ -181,7 +181,8 @@ html, body {
       border: {
         bottom: {
           width: 6px;
-          color: rgba(0, 0, 0, 0.5);
+          // color 每个大区不同, 用脚本设置的
+          // 这里就不写了
         }
       }
     }
@@ -197,7 +198,7 @@ html, body {
     border: {
       bottom: {
         width: 6px;
-        color: #000 !important;
+        // 关于 color 的说明同上
       }
     }
   }

@@ -8,26 +8,55 @@ requirejs(
           MainPage = (function($scope) {
             $scope.areas = [
               {
-                name: '广场'
+                name: '广场',
+                bgcolor: '#f8fcf3',
+                navcolor: '#8eff00'
               },
               {
-                name: '文艺'
+                name: '文艺',
+                bgcolor: '#d9ffe1',
+                navcolor: '#00cb2e'
               },
               {
-                name: '技术'
+                name: '感性',
+                bgcolor: '#eeccff',
+                navcolor: '#a900ff'
               },
               {
-                name: 'ACG'
+                name: '技术',
+                bgcolor: '#d9f9ff',
+                navcolor: '#00d5ff'
               },
               {
-                name: '游戏'
+                name: 'ACG',
+                bgcolor: '#ffe8f1',
+                navcolor: '#ff0066'
               },
               {
-                name: '体育'
+                name: '游戏',
+                bgcolor: '#dddddd',
+                navcolor: '#000000'
+              },
+              {
+                name: '体育',
+                bgcolor: '#ffbf80',
+                navcolor: '#ff8000'
               }
             ];
             $scope.activeArea = 0;
             $scope.topNavHidden = false;
+
+            // 大区个别样式控制
+            $scope.getNavStyle = (function(area) {
+              return {
+                'border-bottom-color': area.navcolor
+              };
+            });
+            $scope.getAreaStyle = (function(area) {
+              return {
+                'background-color': area.bgcolor
+              };
+            });
 
             $scope.updateActiveAreaFactory = (function(idx) {
               // console.log('updateActiveAreaFactory: ' + idx);
