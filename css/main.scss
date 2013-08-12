@@ -23,7 +23,22 @@ html, body {
 
 /* 头像 */
 .avatar-big {
-    background-color: #ccc;
+  background-color: #ccc;
+
+  @media (min-width: 768px) {
+    width: 120px;
+    height: 120px;
+  }
+
+  @media (min-width: 600px) and (max-width: 767px) {
+    width: 90px;
+    height: 90px;
+  }
+
+  @media (max-width: 599px) {
+    width: 60px;
+    height: 60px;
+  }
 }
 
 
@@ -43,12 +58,27 @@ html, body {
   transition: width 0.25s ease, height 0.25s ease, background-color 0.25s ease;
   transition-delay: 0.25s;
 
-  &:hover {
-    width: 350px;
-    height: 550px;
-    background-color: rgba(0, 0, 0, 0.8);
+  @media (min-width: 768px) {
+    width: 120px;
+    height: 120px;
 
-    transition: width 0.2s linear 0.5s, height 0.2s linear 0.5s, background-color 0.25s linear 0s;
+    &:hover {
+      width: 350px;
+      height: 550px;
+      background-color: rgba(0, 0, 0, 0.8);
+
+      transition: width 0.2s linear 0.5s, height 0.2s linear 0.5s, background-color 0.25s linear 0s;
+    }
+  }
+
+  @media (min-width: 600px) and (max-width: 767px) {
+    width: 90px;
+    height: 90px;
+  }
+
+  @media (max-width: 599px) {
+    width: 60px;
+    height: 60px;
   }
 }
 
@@ -174,6 +204,14 @@ html, body {
   -o-box-sizing: border-box;
   box-sizing: border-box;
   width: 100%;
+
+  @media (min-width: 600px) and (max-width: 767px) {
+    padding: 0 0 0 110px;
+  }
+
+  @media (max-width: 599px) {
+    padding: 0 0 0 80px;
+  }
 }
 
 #topnav {
@@ -184,14 +222,7 @@ html, body {
 
 /* 自适应设计 */
 @media (min-width: 768px) {
-  .avatar-big {
-    width: 120px;
-    height: 120px;
-  }
-
   #person {
-    width: 120px;
-    height: 120px;
   }
 
   #topnavbox {
@@ -232,46 +263,6 @@ html, body {
     top: 0px;
     background-color: transparent;
     transition: none;
-  }
-}
-
-@media (max-width: 767px) {
-  #topnavbox {
-    position: fixed;
-    top: 0;
-    right: 0;
-  }
-}
-
-@media (min-width: 600px) and (max-width: 767px) {
-  .avatar-big {
-    width: 90px;
-    height: 90px;
-  }
-
-  #person {
-    width: 90px;
-    height: 90px;
-  }
-
-  #topnavbox {
-    padding: 0 0 0 110px;
-  }
-}
-
-@media (max-width: 599px) {
-  .avatar-big {
-    width: 60px;
-    height: 60px;
-  }
-
-  #person {
-    width: 60px;
-    height: 60px;
-  }
-
-  #topnavbox {
-    padding: 0 0 0 80px;
   }
 }
 
