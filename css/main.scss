@@ -2,8 +2,8 @@
 
 
 html {
-  font-family: "WenQuanYi Micro Hei", "Microsoft YaHei", sans-serif;
-  font-weight: 100;
+  font: 100 16px "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+  line-height: 1.5;
 }
 
 body {
@@ -219,7 +219,8 @@ html, body {
   width: 100%;
 
   @media (min-width: 768px) {
-    padding: 0 0 0 140px;
+    // padding-right 是为了别挡着 #content 上的滚动条
+    padding: 0 2% 0 140px;
   }
 
   @media (min-width: 600px) and (max-width: 767px) {
@@ -241,6 +242,17 @@ html, body {
 
     width: 100%;
     height: 48px;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+
+    border-radius: 0 0 6px 0;
+
+    // 这是为了让最右边导航项的选择效果的 border-bottom 显得不突兀
+    padding: 0 6px 0 0;
 
     -webkit-transition: opacity 0.15s, top 0.15s;
     -moz-transition: opacity 0.15s, top 0.15s;
