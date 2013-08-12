@@ -209,7 +209,6 @@ html, body {
 #topnavbox {
   position: fixed;
   top: 0;
-  right: 0;
   z-index: 1500;
 
   -webkit-box-sizing: border-box;
@@ -217,11 +216,12 @@ html, body {
   -ms-box-sizing: border-box;
   -o-box-sizing: border-box;
   box-sizing: border-box;
-  width: 100%;
 
   @media (min-width: 768px) {
-    // padding-right 是为了别挡着 #content 上的滚动条
-    padding: 0 2% 0 140px;
+    // 别挡着 #content 上的滚动条
+    right: 2%;
+    width: 98%;
+    padding: 0 0 0 140px;
   }
 
   @media (min-width: 600px) and (max-width: 767px) {
