@@ -29,7 +29,7 @@
       <section id="noticebox">
       </section>
       <ul id="areas" class="posts">
-        <li class="area post" ng-repeat="area in areas" ui-jq="waypoint" ui-options="updateActiveAreaFactory($index)">
+        <li class="area post" ng-repeat="area in areas" jq-waypoint="updateActiveAreaFactory($index)" jq-waypoint-ctx="#content">
         <a name="area-{{$index}}"></a>
         {{$index}}.abcdefghijklmnopqrstuvwxyz
         </li>
