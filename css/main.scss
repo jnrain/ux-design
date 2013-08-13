@@ -57,24 +57,37 @@ html, body {
     background-color: rgba(0, 0, 0, 0.8);
     border-radius: 0 0 10px 0;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
-
-    transition: width 0.25s ease, height 0.25s ease, opacity 0.25s ease;
-    transition-delay: 0.25s;
   }
 
   @media (min-width: 768px) {
     width: 120px;
     height: 120px;
 
+    // 这是 hover 撤回时的过渡效果
+    transition: width 0.25s ease, height 0.25s ease, top 0.25s ease, opacity 0.25s ease;
+
     &:hover {
       width: 350px;
       height: 550px;
       opacity: 1;
 
+      // 这是 hover 开始时的过渡效果
+      // 因为 :hover 覆盖了前面的同名属性所以可以做到
       transition:
         width 0.2s linear 0.5s,
         height 0.2s linear 0.5s,
-        opacity 0.25s linear 0s;
+        top 0.15s linear 0s,
+        opacity 0.15s linear 0.15s;
+    }
+
+    &.hidden {
+      // 这个也会缩起来了
+      // 缩上去半个头像的高度加上一个 padding
+      top: -(60px + 10px);
+
+      &:hover {
+        top: 0;
+      }
     }
   }
 
@@ -147,6 +160,20 @@ html, body {
       }
     }
 
+    /* 放慢活跃标签变化时原先活跃的标签向上收缩的速度 */
+    #topnav.hidden & {
+      -webkit-transition: top 0.5s, background-color 0s 0.5s;
+      -moz-transition: top 0.5s, background-color 0s 0.5s;
+      -ms-transition: top 0.5s, background-color 0s 0.5s;
+      -o-transition: top 0.5s, background-color 0s 0.5s;
+      transition: top 0.5s, background-color 0s 0.5s;
+    }
+
+    #topnav.hidden:hover & {
+      /* 不得已重复了一遍 border-bottom-width 的效果... */
+      transition: top 0s, border-bottom-width 0.1s;
+    }
+
     > .navlink {
       @include vertmiddle-inner;
     }
@@ -162,6 +189,19 @@ html, body {
         color: #666;
       }
     }
+
+    /* 让当前活跃的大区标题在顶部导航隐藏的时候拉下来 */
+    #topnav.hidden & {
+      top: 42px;
+      background-color: rgba(0, 0, 0, 0.5);
+      transition: top 0.75s ease 0.15s;
+    }
+
+    #topnav.hidden:hover & {
+      top: 0px;
+      background-color: rgba(0, 0, 0, 0);
+      transition: top 0.15s 0s, background-color 0.5s 0.15s;
+    }
   }
 }
 
@@ -170,7 +210,6 @@ html, body {
 #topnavbox {
   position: fixed;
   top: 0;
-  z-index: 1500;
 
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -195,12 +234,16 @@ html, body {
 }
 
 #topnav {
-  background: none repeat scroll 0 0 rgba(0, 0, 0, 0.75);
-  opacity: 0.5;
+  // opacity: 0.5;
+  // 这里不用 opacity 的原因主要是他会强制让子元素透明, 而且 opacity 只能
+  // 削弱不能加强, 所以想实现一个不是很透明的面包屑导航就不可能了 (因为
+  // 想让它随着顶端导航菜单一起升降的话只有放在 #topnav 里最干净)
+  background-color: rgba(0, 0, 0, 0.75 * 0.5);
 
   @media (min-width: 768px) {
     position: relative;
     top: 0;
+    z-index: 1500;
 
     width: 100%;
     height: 48px;
@@ -216,49 +259,61 @@ html, body {
     // 这是为了让最右边导航项的选择效果的 border-bottom 显得不突兀
     padding: 0 6px 0 0;
 
-    -webkit-transition: opacity 0.15s, top 0.15s;
-    -moz-transition: opacity 0.15s, top 0.15s;
-    -ms-transition: opacity 0.15s, top 0.15s;
-    -o-transition: opacity 0.15s, top 0.15s;
-    transition: opacity 0.15s, top 0.15s;
+    -webkit-transition: background-color 0.15s, top 0.15s;
+    -moz-transition: background-color 0.15s, top 0.15s;
+    -ms-transition: background-color 0.15s, top 0.15s;
+    -o-transition: background-color 0.15s, top 0.15s;
+    transition: background-color 0.15s, top 0.15s;
+
+    .navitem {
+      // 为了让 border-bottom 显示在 (未来的) breadcrumb 上方...
+      // 写在这里是为了和 #topnav 的 z-index 凑近一点方便维护
+      z-index: 1500;
+    }
 
     &:hover {
       top: 0;
-      opacity: 1;
+      // opacity: 1;
+      background-color: rgba(0, 0, 0, 0.75);
     }
 
     &.hidden {
       top: -42px;
 
-      /* 放慢活跃标签变化时原先活跃的标签向上收缩的速度 */
-      .navitem {
-        -webkit-transition: top 0.5s, background-color 0s 0.5s;
-        -moz-transition: top 0.5s, background-color 0s 0.5s;
-        -ms-transition: top 0.5s, background-color 0s 0.5s;
-        -o-transition: top 0.5s, background-color 0s 0.5s;
-        transition: top 0.5s, background-color 0s 0.5s;
-      }
-
-      /* 让当前活跃的大区标题在顶部导航隐藏的时候拉下来 */
-      .navitem-active {
-        top: 42px;
-        background-color: rgba(0, 0, 0, 0.5);
-        transition: top 0.75s ease 0.15s;
-      }
-
       &:hover {
         top: 0;
+      }
+    }
+  }
+}
 
-        .navitem {
-          /* 不得已重复了一遍 border-bottom-width 的效果... */
-          transition: top 0s, border-bottom-width 0.1s;
-        }
 
-        .navitem-active {
-          top: 0px;
-          background-color: rgba(0, 0, 0, 0);
-          transition: top 0.15s 0s, background-color 0.5s 0.15s;
-        }
+// 面包屑导航
+#breadcrumb {
+  @media (min-width: 768px) {
+    position: absolute;
+    top: 48px;
+    left: 0;
+    z-index: 1400;
+
+    background-color: rgba(255, 255, 255, 0.75);
+
+    padding: 6px 1em;
+    border-radius: 0 0 1em 0;
+
+    font-size: 13px;
+
+    > .crumb {
+      float: left;
+
+      &:after {
+        // 这是一个向右的双箭头引号, 打开网页你就知道是啥了
+        content: "\bb";
+        margin: 0 0.4em;
+      }
+
+      &:last-child:after {
+        content: "";
       }
     }
   }
