@@ -51,6 +51,10 @@
     </section>
     <section id="topnavbox">
       <nav id="topnav" ng-class="{ 'hidden': topNavHidden }">
+        <ul id="breadcrumb" class="clear">
+          <li class="crumb">江南听雨站</li>
+          <li class="crumb">首页</li>
+        </ul>
         <ul id="areanav" class="navclass-top clear">
           <li class="areanavitem navitem" ng-repeat="area in areas" ng-class="{ 'navitem-active': $index == activeArea }" ng-style="getNavStyle(area)">
           <a href="#area-{{$index}}" class="areanavlink navlink">{{area.name}}</a>

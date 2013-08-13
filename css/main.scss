@@ -275,4 +275,36 @@ html, body {
 }
 
 
+// 面包屑导航
+#breadcrumb {
+  @media (min-width: 768px) {
+    position: absolute;
+    top: 48px;
+    left: 0;
+    z-index: 1400;
+
+    background-color: rgba(255, 255, 255, 0.75);
+
+    padding: 6px 1em;
+    border-radius: 0 0 1em 0;
+
+    font-size: 13px;
+
+    > .crumb {
+      float: left;
+
+      &:after {
+        // 这是一个向右的双箭头引号, 打开网页你就知道是啥了
+        content: "\bb";
+        margin: 0 0.4em;
+      }
+
+      &:last-child:after {
+        content: "";
+      }
+    }
+  }
+}
+
+
 /* vim:set ai et ts=2 sw=2 sts=2 fenc=utf-8: */
