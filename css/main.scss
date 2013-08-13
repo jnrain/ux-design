@@ -57,24 +57,37 @@ html, body {
     background-color: rgba(0, 0, 0, 0.8);
     border-radius: 0 0 10px 0;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
-
-    transition: width 0.25s ease, height 0.25s ease, opacity 0.25s ease;
-    transition-delay: 0.25s;
   }
 
   @media (min-width: 768px) {
     width: 120px;
     height: 120px;
 
+    // 这是 hover 撤回时的过渡效果
+    transition: width 0.25s ease, height 0.25s ease, top 0.25s ease, opacity 0.25s ease;
+
     &:hover {
       width: 350px;
       height: 550px;
       opacity: 1;
 
+      // 这是 hover 开始时的过渡效果
+      // 因为 :hover 覆盖了前面的同名属性所以可以做到
       transition:
         width 0.2s linear 0.5s,
         height 0.2s linear 0.5s,
-        opacity 0.25s linear 0s;
+        top 0.15s linear 0s,
+        opacity 0.15s linear 0.15s;
+    }
+
+    &.hidden {
+      // 这个也会缩起来了
+      // 缩上去半个头像的高度加上一个 padding
+      top: -(60px + 10px);
+
+      &:hover {
+        top: 0;
+      }
     }
   }
 
