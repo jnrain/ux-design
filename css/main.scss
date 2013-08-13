@@ -147,6 +147,20 @@ html, body {
       }
     }
 
+    /* 放慢活跃标签变化时原先活跃的标签向上收缩的速度 */
+    #topnav.hidden & {
+      -webkit-transition: top 0.5s, background-color 0s 0.5s;
+      -moz-transition: top 0.5s, background-color 0s 0.5s;
+      -ms-transition: top 0.5s, background-color 0s 0.5s;
+      -o-transition: top 0.5s, background-color 0s 0.5s;
+      transition: top 0.5s, background-color 0s 0.5s;
+    }
+
+    #topnav.hidden:hover & {
+      /* 不得已重复了一遍 border-bottom-width 的效果... */
+      transition: top 0s, border-bottom-width 0.1s;
+    }
+
     > .navlink {
       @include vertmiddle-inner;
     }
@@ -161,6 +175,19 @@ html, body {
         // 关于 color 的说明同上
         color: #666;
       }
+    }
+
+    /* 让当前活跃的大区标题在顶部导航隐藏的时候拉下来 */
+    #topnav.hidden & {
+      top: 42px;
+      background-color: rgba(0, 0, 0, 0.5);
+      transition: top 0.75s ease 0.15s;
+    }
+
+    #topnav.hidden:hover & {
+      top: 0px;
+      background-color: rgba(0, 0, 0, 0);
+      transition: top 0.15s 0s, background-color 0.5s 0.15s;
     }
   }
 }
@@ -230,35 +257,8 @@ html, body {
     &.hidden {
       top: -42px;
 
-      /* 放慢活跃标签变化时原先活跃的标签向上收缩的速度 */
-      .navitem {
-        -webkit-transition: top 0.5s, background-color 0s 0.5s;
-        -moz-transition: top 0.5s, background-color 0s 0.5s;
-        -ms-transition: top 0.5s, background-color 0s 0.5s;
-        -o-transition: top 0.5s, background-color 0s 0.5s;
-        transition: top 0.5s, background-color 0s 0.5s;
-      }
-
-      /* 让当前活跃的大区标题在顶部导航隐藏的时候拉下来 */
-      .navitem-active {
-        top: 42px;
-        background-color: rgba(0, 0, 0, 0.5);
-        transition: top 0.75s ease 0.15s;
-      }
-
       &:hover {
         top: 0;
-
-        .navitem {
-          /* 不得已重复了一遍 border-bottom-width 的效果... */
-          transition: top 0s, border-bottom-width 0.1s;
-        }
-
-        .navitem-active {
-          top: 0px;
-          background-color: rgba(0, 0, 0, 0);
-          transition: top 0.15s 0s, background-color 0.5s 0.15s;
-        }
       }
     }
   }
