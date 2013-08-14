@@ -169,7 +169,7 @@ html, body {
       transition: top 0.5s, background-color 0s 0.5s;
     }
 
-    #topnav.hidden:hover & {
+    #topnav.hidden.hover & {
       /* 不得已重复了一遍 border-bottom-width 的效果... */
       transition: top 0s, border-bottom-width 0.1s;
     }
@@ -197,7 +197,7 @@ html, body {
       transition: top 0.75s ease 0.15s;
     }
 
-    #topnav.hidden:hover & {
+    #topnav.hidden.hover & {
       top: 0px;
       background-color: rgba(0, 0, 0, 0);
       transition: top 0.15s 0s, background-color 0.5s 0.15s;
@@ -256,14 +256,18 @@ html, body {
 
     border-radius: 0 0 6px 0;
 
-    // 这是为了让最右边导航项的选择效果的 border-bottom 显得不突兀
-    padding: 0 6px 0 0;
-
     -webkit-transition: background-color 0.15s, top 0.15s;
     -moz-transition: background-color 0.15s, top 0.15s;
     -ms-transition: background-color 0.15s, top 0.15s;
     -o-transition: background-color 0.15s, top 0.15s;
     transition: background-color 0.15s, top 0.15s;
+
+    > .navmenu {
+      width: 100%;
+      height: 100%;
+      // 这是为了让最右边导航项的选择效果的 border-bottom 显得不突兀
+      padding: 0 6px 0 0;
+    }
 
     .navitem {
       // 为了让 border-bottom 显示在 (未来的) breadcrumb 上方...
@@ -271,7 +275,7 @@ html, body {
       z-index: 1500;
     }
 
-    &:hover {
+    &.hover {
       top: 0;
       // opacity: 1;
       background-color: rgba(0, 0, 0, 0.75);
@@ -280,7 +284,7 @@ html, body {
     &.hidden {
       top: -42px;
 
-      &:hover {
+      &.hover {
         top: 0;
       }
     }
