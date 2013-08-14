@@ -41,6 +41,20 @@ requirejs(
             $scope.activeArea = 0;
             $scope.topNavHidden = false;
 
+            // 夜间模式
+            // TODO: 根据当前时间启用/关闭
+            $scope.isNightModeEnabled = false;
+            $scope.getNightModeToggleClass = (function() {
+              var enabled = $scope.isNightModeEnabled;
+              return {
+                'toggle-on': enabled,
+                'toggle-off': !enabled
+              };
+            });
+            $scope.toggleNightMode = (function() {
+              $scope.isNightModeEnabled = !$scope.isNightModeEnabled;
+            });
+
             // 大区个别样式控制
             $scope.getNavStyle = (function(area) {
               return {

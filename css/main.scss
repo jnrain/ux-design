@@ -334,4 +334,50 @@ html, body {
 }
 
 
+// 夜间模式
+// 覆盖层
+#nightmode-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10000000;
+
+  // 精髓, 背景色
+  background-color: rgba(0, 0, 0, 0.75);
+
+  // 关键: 让鼠标事件漏到下层的元素!!
+  // IE11-, 对不住了2333333
+  pointer-events: none;
+
+  // 默认不要显示
+  // 否则在页面加载完成而 Angular 运行时正在初始化的空隙里这个覆盖层会显示,
+  // 等到 Angular 初始化完成它再消失, 就闪瞎狗眼了
+  opacity: 0;
+
+  // 给点动态效果
+  transition: opacity 0.2s linear;
+
+  &.enabled {
+    opacity: 1;
+  }
+}
+
+// 切换元素
+.nightmode-toggle {
+  &.toggle-on:before {
+    body.zh-cn & {
+      content: "\9000\51fa";  // "退出";
+    }
+  }
+
+  &.toggle-off:before {
+    body.zh-cn & {
+      content: "\8fdb\5165";  // "进入";
+    }
+  }
+}
+
+
 /* vim:set ai et ts=2 sw=2 sts=2 fenc=utf-8: */

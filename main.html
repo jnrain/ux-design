@@ -59,6 +59,12 @@
           </ul>
           <ul id="sitenav" class="navclass-top navclass-alignright clear">
             <li class="sitenavitem navitem">
+            <a href="javascript:void(0)" class="sitenavlink navlink nightmode-toggle"
+              ng-class="getNightModeToggleClass()"
+              ng-click="toggleNightMode()"
+              >夜间模式</a>
+            </li>
+            <li class="sitenavitem navitem">
             <a href="#" class="sitenavlink navlink">BT站</a>
             </li>
             <li class="sitenavitem navitem">
@@ -75,6 +81,9 @@
         </ul>
       </nav>
     </section>
+
+    <div id="nightmode-overlay" ng-class="{ enabled: isNightModeEnabled }">
+    </div>
   </div>
 
   <script src="js/main.js"></script>
