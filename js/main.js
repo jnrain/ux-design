@@ -102,8 +102,7 @@ requirejs(
             console.log($scope);
           });
 
-      MainPage.$inject = ['$scope'];
-      mod.directive('jqWaypoint', function($parse) {
+      mod.directive('jqWaypoint', ['$parse', function($parse) {
         return {
           restrict: 'A',
           link: function(scope, element, attrs) {
@@ -121,8 +120,8 @@ requirejs(
             }
           }
         };
-      });
-      mod.controller('MainPage', MainPage);
+      }]);
+      mod.controller('MainPage', ['$scope', MainPage]);
 
       angular.bootstrap(angular.element('#screen'), ['jnrain2-main']);
     });
