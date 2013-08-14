@@ -313,6 +313,12 @@ html, body {
 
     > .crumb {
       float: left;
+      opacity: 0.5;
+      transition: opacity 0.1s linear;
+
+      &:hover {
+        opacity: 1;
+      }
 
       &:after {
         // 这是一个向右的双箭头引号, 打开网页你就知道是啥了
