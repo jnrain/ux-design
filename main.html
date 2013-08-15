@@ -29,7 +29,7 @@
       <section id="noticebox">
       </section>
       <ul id="areas" class="posts">
-        <li id="area-{{$index}}" class="area post"
+        <li id="area-{{area.name}}" class="area post"
         data-ng-repeat="area in areas"
         data-jq-waypoint="updateActiveAreaFactory($index)"
         data-jq-waypoint-ctx="#content"
@@ -46,6 +46,15 @@
         {{$index}}.abcdefghijklmnopqrstuvwxyz
         </li>
       </ul>
+      <footer id="footer"
+      data-jq-waypoint="updateActiveAreaFactory(-1)"
+      data-jq-waypoint-ctx="#content"
+      >
+        <section class="footernotice">
+          <p>Copyright 2012-2013 JNRain.</p>
+          <p><a href="http://validator.w3.org/check?uri=referer">Valid HTML5</a></p>
+        </section>
+      </footer>
     </section>
     <section id="person" data-ng-class="{ 'hidden': topNavHidden }">
       <div class="avatar-big">
@@ -68,7 +77,12 @@
             data-ng-class="{ 'navitem-active': $index == activeArea }"
             data-ng-style="getNavStyle(area)"
             >
-            <a href="#area-{{$index}}" class="areanavlink navlink">{{area.name}}</a>
+            <a href="#area-{{area.name}}" class="areanavlink navlink">{{area.name}}</a>
+            </li>
+            <li class="areanavitem navitem"
+            data-ng-class="{ 'navitem-active': -1 == activeArea }"
+            >
+            <a href="#footer" class="areanavlink navlink">我们</a>
             </li>
           </ul>
           <ul id="sitenav" class="navclass-top navclass-alignright clear">
