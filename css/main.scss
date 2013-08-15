@@ -115,7 +115,10 @@ html, body {
   float: left;
   position: relative;
   width: 100%;
-  min-height: 768px;
+
+  @media (min-width: 768px) {
+    min-height: 768px;
+  }
 
   > .wnd-bg {
     position: absolute;
@@ -123,7 +126,73 @@ html, body {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -100;
+    z-index: 50;
+
+    > .sidewidget {
+      @media (min-width: 768px) {
+        position: absolute;
+        top: 20%;
+
+        min-width: 100px;
+        min-height: 100px;
+
+        &.left {
+          left: 20px;
+        }
+
+        &.right {
+          right: 20px;
+        }
+      }
+    }
+
+    // 大区名
+    > .areaname {
+      @extend .contentwnd > .wnd-bg > .sidewidget;
+      @include vertmiddle-outer;
+
+      // position: fixed;
+
+      // 圆形
+      width: 100px;
+      height: 100px;
+      border-radius: 50px;
+
+      // 这个会被大区覆盖掉的, 只有 footer "我们" 栏目用到这个默认值
+      // TODO: 需要重构么...
+      background-color: rgba(255, 255, 255, 0.25);
+
+      > .areaname-inner {
+        @include vertmiddle-inner;
+
+        color: rgba(0, 0, 0, 0.5);
+        text-align: center;
+        font: {
+          size: 40px;
+        }
+
+        opacity: 0.2;
+        transition: opacity 0.3s ease;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  > .contentbox {
+    // 必须有明确 position 属性, z-index 才有效
+    // http://www.w3schools.com/cssref/pr_pos_z-index.asp
+    position: relative;
+    z-index: 100;
+
+    @media (min-width: 768px) {
+      margin: 0 auto;
+      width: 75%;
+      min-width: 600px;
+      max-width: 1600px;
+    }
   }
 }
 
