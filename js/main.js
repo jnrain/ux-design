@@ -2,10 +2,10 @@
 
 
 requirejs(
-    ['angular', 'angular-scrollevents', 'waypoints'],
+    ['angular', 'angular-scrollevents', 'waypoints', 'stellar.directives'],
     function(angular) {
-      var mod = angular.module('jnrain2-main', ['ngScrollEvent']),
-          MainPage = (function($scope) {
+      var mod = angular.module('jnrain2-main', ['ngScrollEvent', 'stellar.directives']),
+          MainPage = (function($scope, stellar) {
             $scope.areas = [
               {
                 name: '广场',
@@ -99,6 +99,9 @@ requirejs(
               });
             })();
 
+            // Stellar!
+            stellar.against('#screen');
+
             console.log($scope);
           });
 
@@ -121,7 +124,7 @@ requirejs(
           }
         };
       }]);
-      mod.controller('MainPage', ['$scope', MainPage]);
+      mod.controller('MainPage', ['$scope', 'stellar', MainPage]);
 
       angular.bootstrap(angular.element('#screen'), ['jnrain2-main']);
     });

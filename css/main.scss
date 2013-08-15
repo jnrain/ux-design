@@ -115,7 +115,6 @@ html, body {
   float: left;
   position: relative;
   width: 100%;
-  height: 100%;
   min-height: 768px;
 
   > .wnd-bg {
@@ -126,6 +125,12 @@ html, body {
     height: 100%;
     z-index: -100;
   }
+}
+
+.fullcontentwnd {
+  @extend .contentwnd;
+
+  height: 100%;
 }
 
 
@@ -145,7 +150,7 @@ html, body {
 
 // footer
 #footer {
-  @extend .contentwnd;
+  @extend .fullcontentwnd;
   color: #ccc;
 
   > .wnd-bg {
