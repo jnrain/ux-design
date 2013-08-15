@@ -2,10 +2,10 @@
 
 
 requirejs(
-    ['angular', 'angular-scrollevents', 'waypoints'],
+    ['angular', 'angular-scrollevents', 'waypoints', 'stellar.directives'],
     function(angular) {
-      var mod = angular.module('jnrain2-main', ['ngScrollEvent']),
-          MainPage = (function($scope) {
+      var mod = angular.module('jnrain2-main', ['ngScrollEvent', 'stellar.directives']),
+          MainPage = (function($scope, $timeout, stellar) {
             $scope.areas = [
               {
                 name: '广场',
@@ -66,6 +66,39 @@ requirejs(
                 'background-color': area.bgcolor
               };
             });
+            $scope.getAreaNameStyle = (function(area) {
+              var hexToRgb = function(hex) {
+                // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+                var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i,
+                    result;
+
+                hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+                  return r + r + g + g + b + b;
+                });
+
+                result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+                return result ? {
+                  r: parseInt(result[1], 16),
+                  g: parseInt(result[2], 16),
+                  b: parseInt(result[3], 16)
+                } : null;
+              };
+
+              var navColorRgb = hexToRgb(area.navcolor);
+
+              return {
+                'background-color': (
+                    'rgba('
+                      + navColorRgb.r
+                      + ','
+                      + navColorRgb.g
+                      + ','
+                      + navColorRgb.b
+                      + ','
+                      + '0.2)'
+                    )
+              };
+            });
 
             $scope.updateActiveAreaFactory = (function(idx) {
               // console.log('updateActiveAreaFactory: ' + idx);
@@ -99,6 +132,15 @@ requirejs(
               });
             })();
 
+            $timeout(function() {
+              // Stellar!
+              // Stellar.js 的初始化直接写在 scope 里是绝对不行的, 那个时候
+              // ngRepeat 之类的东西还没链接完成...
+              // 这里用 (不延时的) $timeout 包一层
+              // https://github.com/angular/angular.js/wiki/Understanding-Directives
+              stellar.against('#content');
+            }, 0);
+
             console.log($scope);
           });
 
@@ -121,7 +163,7 @@ requirejs(
           }
         };
       }]);
-      mod.controller('MainPage', ['$scope', MainPage]);
+      mod.controller('MainPage', ['$scope', '$timeout', 'stellar', MainPage]);
 
       angular.bootstrap(angular.element('#screen'), ['jnrain2-main']);
     });
