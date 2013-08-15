@@ -10,7 +10,8 @@ inject_app(conf_path='conf.yml')
 
 
 if __name__ == '__main__':
-    cli_server('cherrypy')
+    # make port number the same as Python's SimpleHTTPServer
+    cli_server('cherrypy', port=8000)
 
 
 # vim:set ai et ts=4 sw=4 sts=4 fenc=utf-8:
