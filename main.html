@@ -29,8 +29,7 @@
       <section id="noticebox">
       </section>
       <ul id="areas" class="posts">
-        <li class="area post" data-ng-repeat="area in areas" data-jq-waypoint="updateActiveAreaFactory($index)" data-jq-waypoint-ctx="#content" data-ng-style="getAreaStyle(area)">
-        <a name="area-{{$index}}"></a>
+        <li id="area-{{$index}}" class="area post" data-ng-repeat="area in areas" data-jq-waypoint="updateActiveAreaFactory($index)" data-jq-waypoint-ctx="#content" data-ng-style="getAreaStyle(area)">
         {{area.name}}.abcdefghijklmnopqrstuvwxyz<br />
         {{$index}}.abcdefghijklmnopqrstuvwxyz<br />
         {{$index}}.abcdefghijklmnopqrstuvwxyz<br />
