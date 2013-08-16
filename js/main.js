@@ -2,9 +2,12 @@
 
 
 requirejs(
-    ['angular', 'angular-scrollevents', 'waypoints', 'stellar.directives'],
+    ['angular', 'angular-scrollevents', 'waypoints', 'stellar.directives', 'angular-smoothscroll'],
     function(angular) {
-      var mod = angular.module('jnrain2-main', ['ngScrollEvent', 'stellar.directives']),
+      var mod = angular.module(
+            'jnrain2-main',
+            ['ngScrollEvent', 'stellar.directives', 'angularSmoothscroll']
+          ),
           MainPage = (function($scope, $timeout, stellar) {
             $scope.areas = [
               {
