@@ -176,6 +176,29 @@ html, body {
         }
       }
     }
+
+    // ad banner
+    // 注意: 所有广告元素必须有明确带有广告意义的类名, 以便用户自行屏蔽!
+    > .ad-banner {
+      @extend .contentwnd > .wnd-bg > .sidewidget;
+
+      top: 120px;
+
+      @media (min-width: 768px) {
+        width: 120px;
+        height: 360px;
+
+        background-color: rgba(255, 255, 255, 0.85);
+
+        opacity: 0.2;
+
+        transition: opacity 0.3s;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
   }
 
   > .contentbox {
