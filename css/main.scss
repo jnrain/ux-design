@@ -597,4 +597,51 @@ html, body {
 }
 
 
+// 回到顶端
+#backtotop {
+  @include vertmiddle-outer;
+  position: fixed;
+  z-index: 3000;
+
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s 0.5s;
+
+  &.shown {
+    visibility: visible;
+    opacity: 0.5;
+
+    &:hover {
+      opacity: 1;
+      transition: opacity 0.2s 0s;
+    }
+  }
+
+  @media (min-width: 950px) {
+    bottom: 20px;
+    right: 130px;
+    width: 64px;
+    height: 64px;
+  }
+
+  @media (max-width: 949px) {
+    bottom: 20px;
+    right: 20px;
+    width: 48px;
+    height: 48px;
+  }
+
+  &:after {
+    content: "TOP";
+
+    @include vertmiddle-inner;
+    text-align: center;
+  }
+}
+
+
 /* vim:set ai et ts=2 sw=2 sts=2 fenc=utf-8: */
