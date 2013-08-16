@@ -106,9 +106,6 @@ html, body {
 /* 大区 */
 #content {
   height: 100%;
-
-  /* 让滚动条出现在这里, 而不是 window */
-  overflow: auto;
 }
 
 .contentwnd {
@@ -131,7 +128,6 @@ html, body {
     > .sidewidget {
       @media (min-width: 768px) {
         position: absolute;
-        top: 20%;
 
         min-width: 100px;
         min-height: 100px;
@@ -151,7 +147,7 @@ html, body {
       @extend .contentwnd > .wnd-bg > .sidewidget;
       @include vertmiddle-outer;
 
-      // position: fixed;
+      top: 70px;
 
       // 圆形
       width: 100px;
@@ -171,11 +167,10 @@ html, body {
           size: 40px;
         }
 
-        opacity: 0.2;
-        transition: opacity 0.3s ease;
+        transition: color 0.3s ease;
 
         &:hover {
-          opacity: 1;
+          color: rgba(0, 0, 0, 0.75);
         }
       }
     }
