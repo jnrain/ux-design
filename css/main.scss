@@ -80,13 +80,16 @@ html, body {
         opacity 0.15s linear 0.15s;
     }
 
-    &.hidden {
-      // 这个也会缩起来了
-      // 缩上去半个头像的高度加上一个 padding
-      top: -(60px + 10px);
+    // 只在纵向空间不足时缩起
+    @media (max-height: 700px) {
+      &.hidden {
+        // 这个也会缩起来了
+        // 缩上去半个头像的高度加上一个 padding
+        top: -(60px + 10px);
 
-      &:hover {
-        top: 0;
+        &:hover {
+          top: 0;
+        }
       }
     }
   }
@@ -283,18 +286,20 @@ html, body {
       }
     }
 
-    /* 放慢活跃标签变化时原先活跃的标签向上收缩的速度 */
-    #topnav.hidden & {
-      -webkit-transition: top 0.5s, background-color 0s 0.5s;
-      -moz-transition: top 0.5s, background-color 0s 0.5s;
-      -ms-transition: top 0.5s, background-color 0s 0.5s;
-      -o-transition: top 0.5s, background-color 0s 0.5s;
-      transition: top 0.5s, background-color 0s 0.5s;
-    }
+    @media (max-height: 700px) {
+      /* 放慢活跃标签变化时原先活跃的标签向上收缩的速度 */
+      #topnav.hidden & {
+        -webkit-transition: top 0.5s, background-color 0s 0.5s;
+        -moz-transition: top 0.5s, background-color 0s 0.5s;
+        -ms-transition: top 0.5s, background-color 0s 0.5s;
+        -o-transition: top 0.5s, background-color 0s 0.5s;
+        transition: top 0.5s, background-color 0s 0.5s;
+      }
 
-    #topnav.hidden.hover & {
-      /* 不得已重复了一遍 border-bottom-width 的效果... */
-      transition: top 0s, border-bottom-width 0.1s;
+      #topnav.hidden.hover & {
+        /* 不得已重复了一遍 border-bottom-width 的效果... */
+        transition: top 0s, border-bottom-width 0.1s;
+      }
     }
 
     > .navlink {
@@ -313,17 +318,19 @@ html, body {
       }
     }
 
-    /* 让当前活跃的大区标题在顶部导航隐藏的时候拉下来 */
-    #topnav.hidden & {
-      top: 42px;
-      background-color: rgba(0, 0, 0, 0.5);
-      transition: top 0.75s ease 0.15s;
-    }
+    @media (max-height: 700px) {
+      /* 让当前活跃的大区标题在顶部导航隐藏的时候拉下来 */
+      #topnav.hidden & {
+        top: 42px;
+        background-color: rgba(0, 0, 0, 0.5);
+        transition: top 0.75s ease 0.15s;
+      }
 
-    #topnav.hidden.hover & {
-      top: 0px;
-      background-color: rgba(0, 0, 0, 0);
-      transition: top 0.15s 0s, background-color 0.5s 0.15s;
+      #topnav.hidden.hover & {
+        top: 0px;
+        background-color: rgba(0, 0, 0, 0);
+        transition: top 0.15s 0s, background-color 0.5s 0.15s;
+      }
     }
   }
 }
@@ -404,11 +411,13 @@ html, body {
       background-color: rgba(0, 0, 0, 0.75);
     }
 
-    &.hidden {
-      top: -42px;
+    @media (max-height: 700px) {
+      &.hidden {
+        top: -42px;
 
-      &.hover {
-        top: 0;
+        &.hover {
+          top: 0;
+        }
       }
     }
   }
