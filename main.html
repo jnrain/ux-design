@@ -51,12 +51,10 @@
       data-ng-style="getAreaStyle(area)"
       >
         <h1 class="areaname left" data-ng-style="getAreaNameStyle(area)" data-stellar="0.8">
-          <span class="areaname-inner">
-            <a target="{{anchorForArea(area)}}"
-              data-smooth-scroll-jquery
-              data-offset="0"
-              >{{area.name}}</a>
-          </span>
+          <a target="{{anchorForArea(area)}}" class="areaname-inner"
+            data-smooth-scroll-jquery
+            data-offset="0"
+            >{{area.name}}</a>
         </h1>
       </div>
       </li>
@@ -70,12 +68,10 @@
       </section>
       <div class="wnd-bg">
         <h1 class="areaname left" data-stellar="0.8">
-          <span class="areaname-inner">
-            <a target="footer"
-              data-smooth-scroll-jquery
-              data-offset="0"
-              >我们</a>
-          </span>
+          <a target="footer" class="areaname-inner"
+            data-smooth-scroll-jquery
+            data-offset="0"
+            >我们</a>
         </h1>
       </div>
     </footer>

@@ -161,6 +161,8 @@ html, body {
       > .areaname-inner {
         @include vertmiddle-inner;
 
+        cursor: pointer;
+
         color: rgba(0, 0, 0, 0.5);
         text-align: center;
         font: {
