@@ -32,7 +32,7 @@
     <section id="noticebox">
     </section>
     <ul id="areas" class="posts">
-      <li id="area-{{area.name}}" class="area post"
+      <li id="{{anchorForArea(area)}}" class="area post"
       data-ng-repeat="area in areas"
       data-jq-waypoint="updateActiveAreaFactory($index)"
       >
@@ -51,7 +51,12 @@
       data-ng-style="getAreaStyle(area)"
       >
         <h1 class="areaname left" data-ng-style="getAreaNameStyle(area)" data-stellar="0.8">
-          <span class="areaname-inner">{{area.name}}</span>
+          <span class="areaname-inner">
+            <a target="{{anchorForArea(area)}}"
+              data-smooth-scroll-jquery
+              data-offset="0"
+              >{{area.name}}</a>
+          </span>
         </h1>
       </div>
       </li>
@@ -65,7 +70,12 @@
       </section>
       <div class="wnd-bg">
         <h1 class="areaname left" data-stellar="0.8">
-          <span class="areaname-inner">我们</span>
+          <span class="areaname-inner">
+            <a target="footer"
+              data-smooth-scroll-jquery
+              data-offset="0"
+              >我们</a>
+          </span>
         </h1>
       </div>
     </footer>
@@ -91,7 +101,7 @@
           data-ng-class="{ 'navitem-active': $index == activeArea }"
           data-ng-style="getNavStyle(area)"
           >
-          <a class="areanavlink navlink" target="area-{{area.name}}"
+          <a class="areanavlink navlink" target="{{anchorForArea(area)}}"
             data-smooth-scroll-jquery data-offset="0"
             >{{area.name}}</a>
           </li>
