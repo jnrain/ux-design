@@ -25,12 +25,12 @@ html, body {
 .avatar-big {
   background-color: #ccc;
 
-  @media (min-width: 768px) {
+  @media (min-width: 950px) {
     width: 120px;
     height: 120px;
   }
 
-  @media (min-width: 600px) and (max-width: 767px) {
+  @media (min-width: 600px) and (max-width: 949px) {
     width: 90px;
     height: 90px;
   }
@@ -59,7 +59,7 @@ html, body {
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 950px) {
     width: 120px;
     height: 120px;
 
@@ -94,7 +94,7 @@ html, body {
     }
   }
 
-  @media (min-width: 600px) and (max-width: 767px) {
+  @media (min-width: 600px) and (max-width: 949px) {
     width: 90px;
     height: 90px;
   }
@@ -116,7 +116,7 @@ html, body {
   position: relative;
   width: 100%;
 
-  @media (min-width: 768px) {
+  @media (min-width: 950px) {
     min-height: 768px;
   }
 
@@ -129,7 +129,7 @@ html, body {
     z-index: 50;
 
     > .sidewidget {
-      @media (min-width: 768px) {
+      @media (min-width: 950px) {
         position: absolute;
 
         min-width: 100px;
@@ -187,7 +187,7 @@ html, body {
 
       top: 120px;
 
-      @media (min-width: 768px) {
+      @media (min-width: 950px) {
         width: 120px;
         height: 360px;
 
@@ -210,7 +210,7 @@ html, body {
     position: relative;
     z-index: 100;
 
-    @media (min-width: 768px) {
+    @media (min-width: 950px) {
       margin: 0 auto;
       width: 75%;
       min-width: 600px;
@@ -347,14 +347,14 @@ html, body {
   -o-box-sizing: border-box;
   box-sizing: border-box;
 
-  @media (min-width: 768px) {
+  @media (min-width: 950px) {
     // 别挡着 #content 上的滚动条
     right: 2%;
     width: 98%;
     padding: 0 0 0 140px;
   }
 
-  @media (min-width: 600px) and (max-width: 767px) {
+  @media (min-width: 600px) and (max-width: 949px) {
     padding: 0 0 0 110px;
   }
 
@@ -370,7 +370,7 @@ html, body {
   // 想让它随着顶端导航菜单一起升降的话只有放在 #topnav 里最干净)
   background-color: rgba(0, 0, 0, 0.75 * 0.5);
 
-  @media (min-width: 768px) {
+  @media (min-width: 950px) {
     position: relative;
     top: 0;
     z-index: 1500;
@@ -426,7 +426,7 @@ html, body {
 
 // 面包屑导航
 #breadcrumb {
-  @media (min-width: 768px) {
+  @media (min-width: 950px) {
     position: absolute;
     top: 48px;
     left: 0;
