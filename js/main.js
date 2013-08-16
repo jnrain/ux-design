@@ -118,6 +118,7 @@ requirejs(
               });
             });
 
+            $scope.isScrolledTop = true;
             $scope.updateScroll = (function() {
               var prevTop = 0;
 
@@ -137,6 +138,10 @@ requirejs(
                 // 在不能响应所有 scroll 事件的性能考虑下至少也做成这样
                 // 基本上还是可以接受的
                 $scope.topNavHidden = (top > prevTop);
+
+                // 视口是否已经在顶部 (接近顶部)
+                // 回到顶部链接的可见性需要
+                $scope.isScrolledTop = top <= 150;
 
                 prevTop = top;
               });
