@@ -23,107 +23,125 @@
     [endif] -->
   </head>
 
-  <body class="zh-cn" id="screen" data-ng-controller="MainPage" data-ng-scroll-event="updateScroll($event, isEndEvent)" data-ng-scroll-event-source="window">
-    <section id="content">
-      <section id="noticebox">
+  <body class="zh-cn" id="screen"
+  data-ng-controller="MainPage"
+  data-ng-scroll-event="updateScroll($event, isEndEvent)"
+  data-ng-scroll-event-source="window"
+  >
+  <section id="content">
+    <section id="noticebox">
+    </section>
+    <ul id="areas" class="posts">
+      <li id="{{anchorForArea(area)}}" class="area post"
+      data-ng-repeat="area in areas"
+      data-jq-waypoint="updateActiveAreaFactory($index)"
+      >
+      <div class="contentbox">
+        {{area.name}}.abcdefghijklmnopqrstuvwxyz<br />
+        {{$index}}.abcdefghijklmnopqrstuvwxyz<br />
+        {{$index}}.abcdefghijklmnopqrstuvwxyz<br />
+        {{$index}}.abcdefghijklmnopqrstuvwxyz<br />
+        {{$index}}.abcdefghijklmnopqrstuvwxyz<br />
+        {{$index}}.abcdefghijklmnopqrstuvwxyz<br />
+        {{$index}}.abcdefghijklmnopqrstuvwxyz<br />
+        {{$index}}.abcdefghijklmnopqrstuvwxyz<br />
+        {{$index}}.abcdefghijklmnopqrstuvwxyz
+      </div>
+      <div class="wnd-bg"
+      data-ng-style="getAreaStyle(area)"
+      >
+        <h1 class="areaname left" data-ng-style="getAreaNameStyle(area)" data-stellar="0.8">
+          <span class="areaname-inner">
+            <a target="{{anchorForArea(area)}}"
+              data-smooth-scroll-jquery
+              data-offset="0"
+              >{{area.name}}</a>
+          </span>
+        </h1>
+      </div>
+      </li>
+    </ul>
+    <footer id="footer"
+    data-jq-waypoint="updateActiveAreaFactory(-1)"
+    >
+      <section class="footernotice contentbox">
+        <p>Copyright 2012-2013 JNRain.</p>
+        <p><a href="http://validator.w3.org/check?uri=referer">Valid HTML5</a></p>
       </section>
-      <ul id="areas" class="posts">
-        <li id="area-{{area.name}}" class="area post"
-        data-ng-repeat="area in areas"
-        data-jq-waypoint="updateActiveAreaFactory($index)"
-        >
-        <div class="contentbox">
-          {{area.name}}.abcdefghijklmnopqrstuvwxyz<br />
-          {{$index}}.abcdefghijklmnopqrstuvwxyz<br />
-          {{$index}}.abcdefghijklmnopqrstuvwxyz<br />
-          {{$index}}.abcdefghijklmnopqrstuvwxyz<br />
-          {{$index}}.abcdefghijklmnopqrstuvwxyz<br />
-          {{$index}}.abcdefghijklmnopqrstuvwxyz<br />
-          {{$index}}.abcdefghijklmnopqrstuvwxyz<br />
-          {{$index}}.abcdefghijklmnopqrstuvwxyz<br />
-          {{$index}}.abcdefghijklmnopqrstuvwxyz
-        </div>
-        <div class="wnd-bg"
-        data-ng-style="getAreaStyle(area)"
-        >
-          <h1 class="areaname left" data-ng-style="getAreaNameStyle(area)" data-stellar="0.8">
-            <span class="areaname-inner">{{area.name}}</span>
-          </h1>
-        </div>
-        </li>
-      </ul>
-      <footer id="footer"
-      data-jq-waypoint="updateActiveAreaFactory(-1)"
-      >
-        <section class="footernotice contentbox">
-          <p>Copyright 2012-2013 JNRain.</p>
-          <p><a href="http://validator.w3.org/check?uri=referer">Valid HTML5</a></p>
-        </section>
-        <div class="wnd-bg">
-          <h1 class="areaname left" data-stellar="0.8">
-            <span class="areaname-inner">我们</span>
-          </h1>
-        </div>
-      </footer>
-    </section>
-    <section id="person" data-ng-class="{ 'hidden': topNavHidden }">
-      <div class="avatar-big">
+      <div class="wnd-bg">
+        <h1 class="areaname left" data-stellar="0.8">
+          <span class="areaname-inner">
+            <a target="footer"
+              data-smooth-scroll-jquery
+              data-offset="0"
+              >我们</a>
+          </span>
+        </h1>
       </div>
-      <div class="info">
-      </div>
-    </section>
-    <section id="topnavbox">
-      <nav id="topnav"
-      data-ng-class="{ 'hidden': topNavHidden, 'hover': topNavHover }"
-      data-ng-init="topNavHover = false"
-      >
-        <div class="navmenu"
-        data-ng-mouseenter="topNavHover = true"
-        data-ng-mouseleave="topNavHover = false"
-        >
-          <ul id="areanav" class="navclass-top clear">
-            <li class="areanavitem navitem"
-            data-ng-repeat="area in areas"
-            data-ng-class="{ 'navitem-active': $index == activeArea }"
-            data-ng-style="getNavStyle(area)"
-            >
-            <a data-smooth-scroll-jquery target="area-{{area.name}}" class="areanavlink navlink">{{area.name}}</a>
-            </li>
-            <li class="areanavitem navitem"
-            data-ng-class="{ 'navitem-active': -1 == activeArea }"
-            >
-            <a href="#footer" class="areanavlink navlink">我们</a>
-            </li>
-          </ul>
-          <ul id="sitenav" class="navclass-top navclass-alignright clear">
-            <li class="sitenavitem navitem">
-            <a href="javascript:void(0)" class="sitenavlink navlink nightmode-toggle"
-            data-ng-class="getNightModeToggleClass()"
-            data-ng-click="toggleNightMode()"
-            >夜间模式</a>
-            </li>
-            <li class="sitenavitem navitem">
-            <a href="#" class="sitenavlink navlink">BT站</a>
-            </li>
-            <li class="sitenavitem navitem">
-            <a href="#" class="sitenavlink navlink">日记站</a>
-            </li>
-            <li class="sitenavitem navitem">
-            <a href="#" class="sitenavlink navlink">运行状态</a>
-            </li>
-          </ul>
-        </div>
-        <ul id="breadcrumb" class="clear">
-          <li class="crumb">江南听雨站</li>
-          <li class="crumb">首页</li>
-        </ul>
-      </nav>
-    </section>
-
-    <div id="nightmode-overlay" data-ng-class="{ enabled: isNightModeEnabled }">
+    </footer>
+  </section>
+  <section id="person" data-ng-class="{ 'hidden': topNavHidden }">
+    <div class="avatar-big">
     </div>
+    <div class="info">
+    </div>
+  </section>
+  <section id="topnavbox">
+    <nav id="topnav"
+    data-ng-class="{ 'hidden': topNavHidden, 'hover': topNavHover }"
+    data-ng-init="topNavHover = false"
+    >
+      <div class="navmenu"
+      data-ng-mouseenter="topNavHover = true"
+      data-ng-mouseleave="topNavHover = false"
+      >
+        <ul id="areanav" class="navclass-top clear">
+          <li class="areanavitem navitem"
+          data-ng-repeat="area in areas"
+          data-ng-class="{ 'navitem-active': $index == activeArea }"
+          data-ng-style="getNavStyle(area)"
+          >
+          <a class="areanavlink navlink" target="{{anchorForArea(area)}}"
+            data-smooth-scroll-jquery data-offset="0"
+            >{{area.name}}</a>
+          </li>
+          <li class="areanavitem navitem"
+          data-ng-class="{ 'navitem-active': -1 == activeArea }"
+          >
+          <a class="areanavlink navlink" target="footer"
+            data-smooth-scroll-jquery data-offset="0"
+            >我们</a>
+          </li>
+        </ul>
+        <ul id="sitenav" class="navclass-top navclass-alignright clear">
+          <li class="sitenavitem navitem">
+          <a href="javascript:void(0)" class="sitenavlink navlink nightmode-toggle"
+          data-ng-class="getNightModeToggleClass()"
+          data-ng-click="toggleNightMode()"
+          >夜间模式</a>
+          </li>
+          <li class="sitenavitem navitem">
+          <a href="#" class="sitenavlink navlink">BT站</a>
+          </li>
+          <li class="sitenavitem navitem">
+          <a href="#" class="sitenavlink navlink">日记站</a>
+          </li>
+          <li class="sitenavitem navitem">
+          <a href="#" class="sitenavlink navlink">运行状态</a>
+          </li>
+        </ul>
+      </div>
+      <ul id="breadcrumb" class="clear">
+        <li class="crumb">江南听雨站</li>
+        <li class="crumb">首页</li>
+      </ul>
+    </nav>
+  </section>
 
-    <script src="js/main.js"></script>
+  <div id="nightmode-overlay" data-ng-class="{ enabled: isNightModeEnabled }">
+  </div>
+
+  <script src="js/main.js"></script>
   </body>
 <!-- vim:set ai et ts=2 sw=2 sts=2 fenc=utf-8: -->
 </html>

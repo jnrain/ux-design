@@ -58,6 +58,11 @@ requirejs(
               $scope.isNightModeEnabled = !$scope.isNightModeEnabled;
             });
 
+            // 大区锚点
+            $scope.anchorForArea = (function(area) {
+              return 'area-' + area.name;
+            });
+
             // 大区个别样式控制
             $scope.getNavStyle = (function(area) {
               return {
