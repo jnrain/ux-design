@@ -23,16 +23,14 @@
     [endif] -->
   </head>
 
-  <body class="zh-cn">
-  <div id="screen" data-ng-controller="MainPage">
-    <section id="content" data-ng-scroll-event="updateScroll($event, isEndEvent);">
+  <body class="zh-cn" id="screen" data-ng-controller="MainPage" data-ng-scroll-event="updateScroll($event, isEndEvent)" data-ng-scroll-event-source="window">
+    <section id="content">
       <section id="noticebox">
       </section>
       <ul id="areas" class="posts">
         <li id="area-{{area.name}}" class="area post"
         data-ng-repeat="area in areas"
         data-jq-waypoint="updateActiveAreaFactory($index)"
-        data-jq-waypoint-ctx="#content"
         >
         <div class="contentbox">
           {{area.name}}.abcdefghijklmnopqrstuvwxyz<br />
@@ -56,7 +54,6 @@
       </ul>
       <footer id="footer"
       data-jq-waypoint="updateActiveAreaFactory(-1)"
-      data-jq-waypoint-ctx="#content"
       >
         <section class="footernotice contentbox">
           <p>Copyright 2012-2013 JNRain.</p>
@@ -125,9 +122,8 @@
 
     <div id="nightmode-overlay" data-ng-class="{ enabled: isNightModeEnabled }">
     </div>
-  </div>
 
-  <script src="js/main.js"></script>
+    <script src="js/main.js"></script>
   </body>
 <!-- vim:set ai et ts=2 sw=2 sts=2 fenc=utf-8: -->
 </html>

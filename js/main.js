@@ -8,7 +8,7 @@ requirejs(
             'jnrain2-main',
             ['ngScrollEvent', 'stellar.directives', 'angularSmoothscroll']
           ),
-          MainPage = (function($scope, $timeout, stellar) {
+          MainPage = (function($scope, $window, $timeout, stellar) {
             $scope.areas = [
               {
                 name: '广场',
@@ -117,8 +117,10 @@ requirejs(
               var prevTop = 0;
 
               return (function(event, isEndEvent) {
-                var left = event.target.scrollLeft,
-                    top = event.target.scrollTop;
+                // var left = event.target.scrollLeft,
+                //    top = event.target.scrollTop;
+                var left = $window.pageXOffset,
+                    top = $window.pageYOffset;
 
                 // 两种情况的判断方式完全一样, 省掉 if 块
                 // (原 if(!isEndEvent) 块)
@@ -141,7 +143,7 @@ requirejs(
               // ngRepeat 之类的东西还没链接完成...
               // 这里用 (不延时的) $timeout 包一层
               // https://github.com/angular/angular.js/wiki/Understanding-Directives
-              stellar.against('#content');
+              stellar.window();
             }, 0);
 
             console.log($scope);
@@ -166,7 +168,7 @@ requirejs(
           }
         };
       }]);
-      mod.controller('MainPage', ['$scope', '$timeout', 'stellar', MainPage]);
+      mod.controller('MainPage', ['$scope', '$window', '$timeout', 'stellar', MainPage]);
 
       angular.bootstrap(angular.element('#screen'), ['jnrain2-main']);
     });
