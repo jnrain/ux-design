@@ -44,7 +44,9 @@ html, body {
 
 /* 头像菜单 */
 #person {
-  @media (min-width: 600px) {
+  background-color: rgba(0, 0, 0, 0.8);
+
+  @media (min-width: 950px) {
     position: fixed;
     top: 0;
     left: 0;
@@ -54,12 +56,9 @@ html, body {
 
     padding: 10px;
 
-    background-color: rgba(0, 0, 0, 0.8);
     border-radius: 0 0 10px 0;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
-  }
 
-  @media (min-width: 950px) {
     width: 120px;
     height: 120px;
 
@@ -93,16 +92,6 @@ html, body {
       }
     }
   }
-
-  @media (min-width: 600px) and (max-width: 949px) {
-    width: 90px;
-    height: 90px;
-  }
-
-  @media (max-width: 599px) {
-    width: 60px;
-    height: 60px;
-  }
 }
 
 
@@ -120,6 +109,10 @@ html, body {
     min-height: 768px;
   }
 
+  @media (max-width: 949px) {
+    min-height: 500px;
+  }
+
   > .wnd-bg {
     position: absolute;
     top: 0;
@@ -129,18 +122,19 @@ html, body {
     z-index: 50;
 
     > .sidewidget {
+      position: absolute;
+
       @media (min-width: 950px) {
-        position: absolute;
 
         min-width: 100px;
         min-height: 100px;
 
         &.left {
-          left: 20px;
+          left: 10px;
         }
 
         &.right {
-          right: 20px;
+          right: 10px;
         }
       }
     }
@@ -150,7 +144,13 @@ html, body {
       @extend .contentwnd > .wnd-bg > .sidewidget;
       @include vertmiddle-outer;
 
-      top: 70px;
+      @media (min-width: 950px) {
+        top: 70px;
+      }
+
+      @media (max-width: 949px) {
+        top: 30px;
+      }
 
       // 圆形
       width: 100px;
@@ -188,7 +188,7 @@ html, body {
       top: 120px;
 
       @media (min-width: 950px) {
-        width: 120px;
+        width: 100px;
         height: 360px;
 
         background-color: rgba(255, 255, 255, 0.85);
@@ -256,8 +256,33 @@ html, body {
   float: left;
   height: 100%;
 
+  // 移动体验下占满宽度
+  // 这样用这个类标明分组的不同类的导航不会占用同一行
+  @media (max-width: 949px) {
+    width: 100%;
+  }
+
   &.navclass-alignright {
-    float: right;
+    // 移动体验下这个右对齐没有意义, 只对桌面体验启用
+    @media (min-width: 950px) {
+      float: right;
+    }
+
+    // ... 但还是给一些区别, 主要是那个夜间模式的链接文字比较长
+    > .navitem {
+      // 为了防止换行, 给多一点宽度
+      @media (max-width: 949px) {
+        width: 33.3%;
+      }
+
+      @media (max-width: 599px) {
+        width: 50%;
+      }
+
+      @media (max-width: 299px) {
+        width: 100%;
+      }
+    }
   }
 
   > .navitem {
@@ -271,23 +296,69 @@ html, body {
     color: #fff;
 
     padding: 0 0.75em;
-    border-bottom: 0px solid;
 
-    transition: border-bottom-width 0.1s;
+    @media (min-width: 950px) {
+      border-bottom: 0px solid;
+
+      transition: border-bottom-width 0.1s;
+    }
+
+    // 这些是控制移动体验下每行多少个单元格的
+    @media (max-width: 949px) {
+      width: 25%;
+    }
+
+    @media (max-width: 599px) {
+      width: 33.3%;
+    }
+
+    @media (max-width: 299px) {
+      width: 50%;
+    }
+
+    // 移动体验公共部分
+    @media (max-width: 949px) {
+      // 在移动端排得整齐一点
+      display: table-cell;
+
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -ms-box-sizing: border-box;
+      -o-box-sizing: border-box;
+      box-sizing: border-box;
+
+      // 单元格和文字都大一些, 方便触摸
+      height: 2.5em;
+      font-size: 125%;
+
+      // 让文字居中
+      @include vertmiddle-outer;
+      text-align: center;
+
+      border-bottom: 6px solid;
+    }
 
     &:hover {
-      border: {
-        bottom: {
-          width: 6px;
-          // color 每个大区不同, 用脚本设置的
-          // 这里是没有明确指定颜色情况下采用的默认值
-          color: #666;
+      @media (min-width: 950px) {
+        // 桌面体验: 伸出 border-bottom
+        border: {
+          bottom: {
+            width: 6px;
+            // color 每个大区不同, 用脚本设置的
+            // 这里是没有明确指定颜色情况下采用的默认值
+            color: #666;
+          }
         }
+      }
+
+      @media (max-width: 949px) {
+        // 移动体验: 背景色变化
+        background-color: rgba(0, 0, 0, 0.5);
       }
     }
 
-    @media (max-height: 700px) {
-      /* 放慢活跃标签变化时原先活跃的标签向上收缩的速度 */
+    @media (min-width: 950px) and (max-height: 700px) {
+      // 桌面体验: 放慢活跃标签变化时原先活跃的标签向上收缩的速度
       #topnav.hidden & {
         -webkit-transition: top 0.5s, background-color 0s 0.5s;
         -moz-transition: top 0.5s, background-color 0s 0.5s;
@@ -308,18 +379,21 @@ html, body {
   }
 
   > .navitem-active {
-    font-weight: bold;
+    @media (min-width: 950px) {
+      // 这个在移动体验没有意义, 因为你在后面的大区看不到导航...
+      font-weight: bold;
 
-    border: {
-      bottom: {
-        width: 6px;
-        // 关于 color 的说明同上
-        color: #666;
+      border: {
+        bottom: {
+          width: 6px;
+          // 关于 color 的说明同上
+          color: #666;
+        }
       }
     }
 
-    @media (max-height: 700px) {
-      /* 让当前活跃的大区标题在顶部导航隐藏的时候拉下来 */
+    @media (min-width: 950px) and (max-height: 700px) {
+      // 桌面体验: 让当前活跃的大区标题在顶部导航隐藏的时候拉下来
       #topnav.hidden & {
         top: 42px;
         background-color: rgba(0, 0, 0, 0.5);
@@ -338,9 +412,6 @@ html, body {
 
 /* 顶部导航 */
 #topnavbox {
-  position: fixed;
-  top: 0;
-
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
@@ -348,29 +419,33 @@ html, body {
   box-sizing: border-box;
 
   @media (min-width: 950px) {
+    position: fixed;
+    top: 0;
+
     // 别挡着 #content 上的滚动条
     right: 2%;
     width: 98%;
     padding: 0 0 0 140px;
   }
 
-  @media (min-width: 600px) and (max-width: 949px) {
-    padding: 0 0 0 110px;
-  }
-
-  @media (max-width: 599px) {
-    padding: 0 0 0 80px;
+  @media (max-width: 949px) {
   }
 }
 
 #topnav {
-  // opacity: 0.5;
-  // 这里不用 opacity 的原因主要是他会强制让子元素透明, 而且 opacity 只能
-  // 削弱不能加强, 所以想实现一个不是很透明的面包屑导航就不可能了 (因为
-  // 想让它随着顶端导航菜单一起升降的话只有放在 #topnav 里最干净)
-  background-color: rgba(0, 0, 0, 0.75 * 0.5);
+  @media (max-width: 949px) {
+    // 因为移动体验下导航栏的位置是静态的, 所以设置动态的背景效果没有意义
+    // 直接用上桌面体验下活动状态的背景色
+    background-color: rgba(0, 0, 0, 0.75);
+  }
 
   @media (min-width: 950px) {
+    // opacity: 0.5;
+    // 这里不用 opacity 的原因主要是他会强制让子元素透明, 而且 opacity 只能
+    // 削弱不能加强, 所以想实现一个不是很透明的面包屑导航就不可能了 (因为
+    // 想让它随着顶端导航菜单一起升降的话只有放在 #topnav 里最干净)
+    background-color: rgba(0, 0, 0, 0.75 * 0.5);
+
     position: relative;
     top: 0;
     z-index: 1500;
@@ -442,25 +517,35 @@ html, body {
     }
 
     font-size: 13px;
+  }
 
-    > .crumb {
-      float: left;
+  @media (max-width: 949px) {
+    color: #fff;
+
+    padding: 0.3em;
+  }
+
+  > .crumb {
+    float: left;
+
+    // 过渡效果只给桌面启用
+    @media (min-width: 950px) {
       opacity: 0.5;
       transition: opacity 0.1s linear;
 
       &:hover {
         opacity: 1;
       }
+    }
 
-      &:after {
-        // 这是一个向右的双箭头引号, 打开网页你就知道是啥了
-        content: "\bb";
-        margin: 0 0.4em;
-      }
+    &:after {
+      // 这是一个向右的双箭头引号, 打开网页你就知道是啥了
+      content: "\bb";
+      margin: 0 0.4em;
+    }
 
-      &:last-child:after {
-        content: "";
-      }
+    &:last-child:after {
+      content: "";
     }
   }
 }

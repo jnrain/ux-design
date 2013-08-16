@@ -28,6 +28,65 @@
   data-ng-scroll-event="updateScroll($event, isEndEvent)"
   data-ng-scroll-event-source="window"
   >
+  <section id="person" data-ng-class="{ 'hidden': topNavHidden }">
+    <div class="avatar-big">
+    </div>
+    <div class="info">
+    </div>
+  </section>
+
+  <section id="topnavbox">
+    <nav id="topnav"
+    data-ng-class="{ 'hidden': topNavHidden, 'hover': topNavHover }"
+    data-ng-init="topNavHover = false"
+    >
+      <div class="navmenu clear"
+      data-ng-mouseenter="topNavHover = true"
+      data-ng-mouseleave="topNavHover = false"
+      >
+        <ul id="areanav" class="navclass-top clear">
+          <li class="areanavitem navitem"
+          data-ng-repeat="area in areas"
+          data-ng-class="{ 'navitem-active': $index == activeArea }"
+          data-ng-style="getNavStyle(area)"
+          >
+          <a class="areanavlink navlink" target="{{anchorForArea(area)}}"
+            data-smooth-scroll-jquery data-offset="0"
+            >{{area.name}}</a>
+          </li>
+          <li class="areanavitem navitem"
+          data-ng-class="{ 'navitem-active': -1 == activeArea }"
+          >
+          <a class="areanavlink navlink" target="footer"
+            data-smooth-scroll-jquery data-offset="0"
+            >我们</a>
+          </li>
+        </ul>
+        <ul id="sitenav" class="navclass-top navclass-alignright clear">
+          <li class="sitenavitem navitem">
+          <a href="javascript:void(0)" class="sitenavlink navlink nightmode-toggle"
+          data-ng-class="getNightModeToggleClass()"
+          data-ng-click="toggleNightMode()"
+          >夜间模式</a>
+          </li>
+          <li class="sitenavitem navitem">
+          <a href="#" class="sitenavlink navlink">BT站</a>
+          </li>
+          <li class="sitenavitem navitem">
+          <a href="#" class="sitenavlink navlink">日记站</a>
+          </li>
+          <li class="sitenavitem navitem">
+          <a href="#" class="sitenavlink navlink">运行状态</a>
+          </li>
+        </ul>
+      </div>
+      <ul id="breadcrumb" class="clear">
+        <li class="crumb">江南听雨站</li>
+        <li class="crumb">首页</li>
+      </ul>
+    </nav>
+  </section>
+
   <section id="content">
     <section id="noticebox">
     </section>
@@ -78,63 +137,6 @@
         </h1>
       </div>
     </footer>
-  </section>
-  <section id="person" data-ng-class="{ 'hidden': topNavHidden }">
-    <div class="avatar-big">
-    </div>
-    <div class="info">
-    </div>
-  </section>
-  <section id="topnavbox">
-    <nav id="topnav"
-    data-ng-class="{ 'hidden': topNavHidden, 'hover': topNavHover }"
-    data-ng-init="topNavHover = false"
-    >
-      <div class="navmenu"
-      data-ng-mouseenter="topNavHover = true"
-      data-ng-mouseleave="topNavHover = false"
-      >
-        <ul id="areanav" class="navclass-top clear">
-          <li class="areanavitem navitem"
-          data-ng-repeat="area in areas"
-          data-ng-class="{ 'navitem-active': $index == activeArea }"
-          data-ng-style="getNavStyle(area)"
-          >
-          <a class="areanavlink navlink" target="{{anchorForArea(area)}}"
-            data-smooth-scroll-jquery data-offset="0"
-            >{{area.name}}</a>
-          </li>
-          <li class="areanavitem navitem"
-          data-ng-class="{ 'navitem-active': -1 == activeArea }"
-          >
-          <a class="areanavlink navlink" target="footer"
-            data-smooth-scroll-jquery data-offset="0"
-            >我们</a>
-          </li>
-        </ul>
-        <ul id="sitenav" class="navclass-top navclass-alignright clear">
-          <li class="sitenavitem navitem">
-          <a href="javascript:void(0)" class="sitenavlink navlink nightmode-toggle"
-          data-ng-class="getNightModeToggleClass()"
-          data-ng-click="toggleNightMode()"
-          >夜间模式</a>
-          </li>
-          <li class="sitenavitem navitem">
-          <a href="#" class="sitenavlink navlink">BT站</a>
-          </li>
-          <li class="sitenavitem navitem">
-          <a href="#" class="sitenavlink navlink">日记站</a>
-          </li>
-          <li class="sitenavitem navitem">
-          <a href="#" class="sitenavlink navlink">运行状态</a>
-          </li>
-        </ul>
-      </div>
-      <ul id="breadcrumb" class="clear">
-        <li class="crumb">江南听雨站</li>
-        <li class="crumb">首页</li>
-      </ul>
-    </nav>
   </section>
 
   <div id="nightmode-overlay" data-ng-class="{ enabled: isNightModeEnabled }">
