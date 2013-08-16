@@ -91,12 +91,16 @@
           data-ng-class="{ 'navitem-active': $index == activeArea }"
           data-ng-style="getNavStyle(area)"
           >
-          <a data-smooth-scroll target="area-{{area.name}}" data-offset="0" class="areanavlink navlink">{{area.name}}</a>
+          <a class="areanavlink navlink" target="area-{{area.name}}"
+            data-smooth-scroll-jquery data-offset="0"
+            >{{area.name}}</a>
           </li>
           <li class="areanavitem navitem"
           data-ng-class="{ 'navitem-active': -1 == activeArea }"
           >
-          <a data-smooth-scroll target="footer" data-offset="0" class="areanavlink navlink">我们</a>
+          <a class="areanavlink navlink" target="footer"
+            data-smooth-scroll-jquery data-offset="0"
+            >我们</a>
           </li>
         </ul>
         <ul id="sitenav" class="navclass-top navclass-alignright clear">
